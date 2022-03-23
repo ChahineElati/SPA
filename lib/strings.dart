@@ -1,2 +1,2 @@
 const String appName = 'SPA';
-const String interfaceAccueil = 'Accueil';
+const pagesNames = <String>['Accueil', 'Centres', 'Mes Réservations', 'Profil'];
