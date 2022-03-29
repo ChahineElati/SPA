@@ -6,8 +6,7 @@ import 'package:odoo/odoo.dart';
 class Accueil extends StatefulWidget {
   final UserLoggedIn? user;
 
-  Accueil({Key? key, required this.user}) : super(key: key);
-  Odoo odoo = Odoo(Connection(url: Url(Protocol.http, "10.0.2.2", 8069), db: 'SPA'));
+  const Accueil({Key? key, required this.user}) : super(key: key);
 
   @override
   State<Accueil> createState() => _AccueilState();
@@ -17,6 +16,6 @@ class _AccueilState extends State<Accueil> {
 
   @override
   Widget build(BuildContext context) {
-    return Text('bienvenu ${widget.user==null ? '' : widget.user?.username}');
+    return Text('bienvenu ${widget.user==null ? '' : widget.user?.name}');
   }
 }
