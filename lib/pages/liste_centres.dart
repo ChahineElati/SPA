@@ -5,6 +5,6 @@ class ListeCentres extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('liste des centres');
+    return const Text('liste des centres');
   }
 }

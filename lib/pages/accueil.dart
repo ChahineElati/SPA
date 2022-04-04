@@ -13,9 +13,8 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> {
-
   @override
   Widget build(BuildContext context) {
-    return Text('bienvenu ${widget.user==null ? '' : widget.user?.name}');
+    return Text('bienvenu ${widget.user == null ? '' : widget.user?.name}');
   }
 }

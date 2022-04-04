@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:odoo/odoo.dart';
 import 'package:spa/pages/accueil.dart';
 import 'package:spa/pages/liste_centres.dart';
 import 'package:spa/pages/login.dart';
@@ -36,6 +35,7 @@ class _SPAState extends State<SPA> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: Padding(
         padding: const EdgeInsets.only(left: 7.0),
         child: PageView(

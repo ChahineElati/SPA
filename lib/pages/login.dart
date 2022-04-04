@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
+// ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:odoo/odoo.dart';
-import 'package:spa/pages/creer_compte.dart';
-import 'package:spa/parent.dart';
+import 'package:spa/pages/creer_compte_client.dart';
+import 'package:spa/services/email_validator.dart';
+import 'package:spa/services/user_services.dart';
+import 'package:spa/pages/creer_compte_personnel.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -13,27 +14,35 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _formKey = GlobalKey<FormState>();
+  final email = TextEditingController();
+  final pwd = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final email = TextEditingController();
-    final pwd = TextEditingController();
-    Odoo odoo = Odoo(
-        Connection(url: Url(Protocol.http, "192.168.1.48", 8069), db: 'SPA'));
-    UserLoggedIn user;
-
     return Card(
       child: Form(
+        key: _formKey,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.account_circle_rounded,
+              Title(
+                  color: Colors.black,
+                  child: const Text(
+                    "S'identifier",
+                    style:
+                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                  )),
+              const Icon(Icons.account_circle_rounded,
                   size: 150, color: Color(0xff008a00)),
               SizedBox(
                 width: 300,
                 child: TextFormField(
+                  validator: (value) => validateEmail(value),
                   controller: email,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
+                      hintText: 'Email',
                       label: Text('Email'),
                       counterText: '',
                       labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
@@ -44,58 +53,73 @@ class _LoginState extends State<Login> {
                 width: 300,
                 child: TextFormField(
                   controller: pwd,
-                  decoration: InputDecoration(
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  validator: (value) {
+                    if (value == "" || value == null) {
+                      return "Champ vide";
+                    } else {
+                      return null;
+                    }
+                  },
+                  decoration: const InputDecoration(
+                      hintText: 'Mot de Passe',
                       label: Text('Mot de Passe'),
                       counterText: '',
                       labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
                   maxLength: 40,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                    margin: const EdgeInsets.only(top: 20),
                     child: ElevatedButton(
-                      onPressed: () async {
-                        try {
-                          user = await odoo.connect(Credential(email.text, pwd.text));
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SPA(user: user)));
-                        } on Exception catch (e) {
-                          print(e.toString());
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          login(context, email, pwd);
                         }
-                        // create();
                       },
-                      child: Text(
+                      child: const Text(
                         'Log In',
                         style: TextStyle(fontSize: 20.0),
                       ),
                       style: ElevatedButton.styleFrom(
-                          fixedSize: Size(90, 40), primary: Color(0xFF34c759)),
+                          fixedSize: const Size(90, 40), primary: const Color(0xFF34c759)),
                     ),
                   ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: ElevatedButton(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: TextButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CreerCompte()));
+                                builder: (context) => const CreerCompte()));
                       },
-                      child: Text(
-                        'Create Account',
+                      child: const Text(
+                        'Devenir un client',
                         softWrap: true,
-                        style: TextStyle(fontSize: 20.0),
+                        style: TextStyle(fontSize: 15.0),
                       ),
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: Size(180, 40), primary: Color(0xFF34c759)),
+                    ),
+                  ),
+                  const Text(
+                    'ou',
+                    style: TextStyle(fontSize: 15.0),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CreerComptePersonnel()));
+                    },
+                    child: const Text(
+                      'Devenir un personnel SPA',
+                      softWrap: true,
+                      style: TextStyle(fontSize: 15.0),
                     ),
                   ),
                 ],
