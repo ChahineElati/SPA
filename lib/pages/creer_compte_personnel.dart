@@ -11,7 +11,7 @@ class CreerComptePersonnel extends StatefulWidget {
 }
 
 class _CreerComptePersonnelState extends State<CreerComptePersonnel> {
-  final comptePersonnelFormKey = GlobalKey<FormState>();
+  final _comptePersonnelFormKey = GlobalKey<FormState>();
   final nomCentre = TextEditingController();
   final email = TextEditingController();
   final mdp = TextEditingController();
@@ -33,6 +33,7 @@ class _CreerComptePersonnelState extends State<CreerComptePersonnel> {
           child: Padding(
               padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Form(
+                key: _comptePersonnelFormKey,
                 autovalidateMode: AutovalidateMode.always,
                 child: Center(
                   child: Column(
@@ -134,7 +135,7 @@ class _CreerComptePersonnelState extends State<CreerComptePersonnel> {
                             margin: const EdgeInsets.only(top: 20),
                             child: ElevatedButton(
                               onPressed: () {
-                                if (comptePersonnelFormKey.currentState!.validate()) {
+                                if (_comptePersonnelFormKey.currentState!.validate()) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content: Text('Compte Créé avec succés')),
