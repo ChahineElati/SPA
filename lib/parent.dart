@@ -82,14 +82,6 @@ class _SPAState extends State<SPA> {
         ],
       ),
       appBar: AppBar(
-        actions: [
-          TextButton(
-              onPressed: () {},
-              child: Icon(
-                Icons.search,
-                color: Colors.white,
-              ))
-        ],
         title: Text(pagesNames[_selectedIndex]),
         centerTitle: true,
         backgroundColor: Color(0xff008a00),

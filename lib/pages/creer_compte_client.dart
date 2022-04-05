@@ -18,13 +18,16 @@ class _CreerCompteState extends State<CreerCompte> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text('Inscription'),
         centerTitle: true,
         backgroundColor: const Color(0xff008a00),
         automaticallyImplyLeading: false,
       ),
-      body: Card(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(top: 20.0),
         child: Form(
           key: _formKey,
           autovalidateMode: AutovalidateMode.always,
@@ -114,7 +117,7 @@ class _CreerCompteState extends State<CreerCompte> {
                     autocorrect: false,
                     decoration: const InputDecoration(
                         hintText: 'Confirmer Mot de Passe',
-                        label: const Text('Confirmer Mot de Passe'),
+                        label: Text('Confirmer Mot de Passe'),
                         counterText: '',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 20)),

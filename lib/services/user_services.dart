@@ -17,7 +17,8 @@ Future<Object> login(BuildContext context, TextEditingController email,
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => EspacePersonnelSPA(user: userLogin, odoo: odoo)));
+              builder: (context) =>
+                  EspacePersonnelSPA(user: userLogin, odoo: odoo)));
     } else {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => SPA(user: userLogin)));
@@ -27,8 +28,12 @@ Future<Object> login(BuildContext context, TextEditingController email,
     print(e.toString());
     return showDialog(
         context: context,
-        builder: (BuildContext context) => const AlertDialog(
-              content: Text('invalid'),
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text('Login Invalide'),
+              content: const Text('Email ou mot de passe incorrecte.'),
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [TextButton(onPressed: () {Navigator.of(context).pop();}, child: const Text('Réssayer',
+              style: TextStyle(fontSize: 17.0),))],
             ));
   }
 }

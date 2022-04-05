@@ -20,8 +20,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Form(
+    return Form(
         key: _formKey,
         child: Center(
           child: Column(
@@ -127,7 +126,6 @@ class _LoginState extends State<Login> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
