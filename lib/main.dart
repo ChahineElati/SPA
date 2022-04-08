@@ -6,5 +6,5 @@ void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
       title: appName,
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const SPA(user: null),
+      home: const SPA(user: null, odoo: null,),
     ));

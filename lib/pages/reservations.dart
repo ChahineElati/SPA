@@ -3,20 +3,26 @@
 import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
 import 'package:spa/parent.dart';
+import 'package:spa/services/user_services.dart';
 
-class Reservations extends StatelessWidget {
-  const Reservations({Key? key}) : super(key: key);
+class Reservations extends StatefulWidget {
+  const Reservations({Key? key, required this.user, required this.odoo}) : super(key: key);
+  final Odoo? odoo;
+  final UserLoggedIn? user;
 
   @override
+  State<Reservations> createState() => _ReservationsState();
+}
+
+class _ReservationsState extends State<Reservations> {
+  @override
   Widget build(BuildContext context) {
-    Odoo odoo = Odoo(
-        Connection(url: Url(Protocol.http, "192.168.0.103", 8069), db: 'SPA'));
     return Column(children: [
       Text('Mes Réservations'),
       ElevatedButton(
           onPressed: (() {
             odoo.disconnect();
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> SPA(user: null)));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> SPA(user: null, odoo: odoo)));
           }),
           child: Text('Disconnect'))
     ]);

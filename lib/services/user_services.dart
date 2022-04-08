@@ -3,8 +3,7 @@ import 'package:odoo/odoo.dart';
 import 'package:spa/pages/espace_personnel.dart';
 import 'package:spa/parent.dart';
 
-Odoo odoo =
-    Odoo(Connection(url: Url(Protocol.http, "192.168.1.6", 8069), db: 'SPA'));
+Odoo odoo = Odoo(Connection(url: Url(Protocol.http, "192.168.1.6", 8069), db: 'SPA'));
 
 Future<Object> login(BuildContext context, TextEditingController email,
     TextEditingController pwd) async {
@@ -21,7 +20,7 @@ Future<Object> login(BuildContext context, TextEditingController email,
                   EspacePersonnelSPA(user: userLogin, odoo: odoo)));
     } else {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SPA(user: userLogin)));
+          MaterialPageRoute(builder: (context) => SPA(user: userLogin, odoo: odoo)));
     }
     return true;
   } on Exception catch (e) {
@@ -49,7 +48,7 @@ void creerCompteClient(BuildContext context, TextEditingController nomComplet,
   });
   odoo.disconnect();
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => const SPA(user: null)));
+      context, MaterialPageRoute(builder: (context) => SPA(user: null, odoo: odoo,)));
 }
 
 void creerComptePersonnel(
@@ -67,5 +66,5 @@ void creerComptePersonnel(
   });
   odoo.disconnect();
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => const SPA(user: null)));
+      context, MaterialPageRoute(builder: (context) => SPA(user: null, odoo: odoo,)));
 }

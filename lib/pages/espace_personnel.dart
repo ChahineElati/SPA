@@ -6,10 +6,10 @@ import 'package:spa/services/chaise_services.dart';
 import 'package:spa/services/user_services.dart';
 
 class EspacePersonnelSPA extends StatefulWidget {
-  const EspacePersonnelSPA({Key? key, this.user, this.odoo}) : super(key: key);
+  const EspacePersonnelSPA({Key? key,required this.user, required this.odoo}) : super(key: key);
 
-  final user;
-  final odoo;
+  final UserLoggedIn user;
+  final Odoo? odoo;
 
   @override
   State<EspacePersonnelSPA> createState() => _EspacePersonnelSPAState();
@@ -30,7 +30,7 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text('Inscription'),
+        title: Text('Espace SPA'),
         centerTitle: true,
         backgroundColor: Color(0xff008a00),
         automaticallyImplyLeading: false,

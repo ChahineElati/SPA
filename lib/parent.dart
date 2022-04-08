@@ -1,17 +1,20 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:odoo/odoo.dart';
 import 'package:spa/pages/accueil.dart';
 import 'package:spa/pages/liste_centres.dart';
 import 'package:spa/pages/login.dart';
 import 'package:spa/pages/profil.dart';
 import 'package:spa/pages/reservations.dart';
+import 'package:spa/services/user_services.dart';
 import 'package:spa/strings.dart';
 
 class SPA extends StatefulWidget {
-  final user;
-
-  const SPA({Key? key, required this.user}) : super(key: key);
+  final UserLoggedIn? user;
+  final Odoo? odoo;
+  const SPA({Key? key, required this.user, required this.odoo})
+      : super(key: key);
 
   @override
   State<SPA> createState() => _SPAState();
@@ -24,6 +27,7 @@ class _SPAState extends State<SPA> {
   void initState() {
     super.initState();
     _pageController = PageController();
+    odoo.connect(Credential('chahinosaiyan@gmail.com', '1272000Ch*'));
   }
 
   @override
@@ -35,9 +39,10 @@ class _SPAState extends State<SPA> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey.shade200,
       body: Padding(
-        padding: const EdgeInsets.only(left: 7.0),
+        padding: EdgeInsets.only(left: 7.0),
         child: PageView(
           controller: _pageController,
           onPageChanged: (index) {
@@ -46,10 +51,20 @@ class _SPAState extends State<SPA> {
           children: <Widget>[
             Accueil(
               user: widget.user,
+              odoo: widget.odoo,
             ),
-            ListeCentres(),
-            widget.user == null ? Login() : Reservations(),
-            widget.user == null ? Login() : Profil(),
+            widget.user == null
+                ? ListeCentres(odoo: odoo)
+                : ListeCentres(odoo: widget.odoo),
+            widget.user == null
+                ? Login()
+                : Reservations(
+                    user: widget.user,
+                    odoo: widget.odoo,
+                  ),
+            widget.user == null
+                ? Login()
+                : Profil(user: widget.user, odoo: widget.odoo),
           ],
         ),
       ),

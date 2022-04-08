@@ -5,8 +5,8 @@ import 'package:odoo/odoo.dart';
 
 class Accueil extends StatefulWidget {
   final UserLoggedIn? user;
-
-  const Accueil({Key? key, required this.user}) : super(key: key);
+  final Odoo? odoo;
+  const Accueil({Key? key, required this.user, required this.odoo}) : super(key: key);
 
   @override
   State<Accueil> createState() => _AccueilState();

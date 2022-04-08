@@ -20,112 +20,115 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Title(
-                  color: Colors.black,
-                  child: const Text(
-                    "S'identifier",
-                    style:
-                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-                  )),
-              const Icon(Icons.account_circle_rounded,
-                  size: 150, color: Color(0xff008a00)),
-              SizedBox(
-                width: 300,
-                child: TextFormField(
-                  validator: (value) => validateEmail(value),
-                  controller: email,
-                  decoration: const InputDecoration(
-                      hintText: 'Email',
-                      label: Text('Email'),
-                      counterText: '',
-                      labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
-                  maxLength: 40,
-                ),
-              ),
-              SizedBox(
-                width: 300,
-                child: TextFormField(
-                  controller: pwd,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  validator: (value) {
-                    if (value == "" || value == null) {
-                      return "Champ vide";
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: const InputDecoration(
-                      hintText: 'Mot de Passe',
-                      label: Text('Mot de Passe'),
-                      counterText: '',
-                      labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
-                  maxLength: 40,
-                ),
-              ),
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 20),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          login(context, email, pwd);
-                        }
-                      },
-                      child: const Text(
-                        'Log In',
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(90, 40), primary: const Color(0xFF34c759)),
-                    ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Form(
+          key: _formKey,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Title(
+                    color: Colors.black,
+                    child: const Text(
+                      "S'identifier",
+                      style:
+                          TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                    )),
+                const Icon(Icons.account_circle_rounded,
+                    size: 150, color: Color(0xff008a00)),
+                SizedBox(
+                  width: 300,
+                  child: TextFormField(
+                    validator: (value) => validateEmail(value),
+                    controller: email,
+                    decoration: const InputDecoration(
+                        hintText: 'Email',
+                        label: Text('Email'),
+                        counterText: '',
+                        labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
+                    maxLength: 40,
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 20),
-                    child: TextButton(
+                ),
+                SizedBox(
+                  width: 300,
+                  child: TextFormField(
+                    controller: pwd,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    validator: (value) {
+                      if (value == "" || value == null) {
+                        return "Champ vide";
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: const InputDecoration(
+                        hintText: 'Mot de Passe',
+                        label: Text('Mot de Passe'),
+                        counterText: '',
+                        labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
+                    maxLength: 40,
+                  ),
+                ),
+                Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            login(context, email, pwd);
+                          }
+                        },
+                        child: const Text(
+                          'Log In',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(90, 40), primary: const Color(0xFF34c759)),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const CreerCompte()));
+                        },
+                        child: const Text(
+                          'Devenir un client',
+                          softWrap: true,
+                          style: TextStyle(fontSize: 15.0),
+                        ),
+                      ),
+                    ),
+                    const Text(
+                      'ou',
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                    TextButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const CreerCompte()));
+                                builder: (context) => const CreerComptePersonnel()));
                       },
                       child: const Text(
-                        'Devenir un client',
+                        'Devenir un personnel SPA',
                         softWrap: true,
                         style: TextStyle(fontSize: 15.0),
                       ),
                     ),
-                  ),
-                  const Text(
-                    'ou',
-                    style: TextStyle(fontSize: 15.0),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CreerComptePersonnel()));
-                    },
-                    child: const Text(
-                      'Devenir un personnel SPA',
-                      softWrap: true,
-                      style: TextStyle(fontSize: 15.0),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-      );
+    );
   }
 }
