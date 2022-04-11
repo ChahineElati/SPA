@@ -1,7 +1,8 @@
 class Centre {
   String nom;
-  // String address;
+  String? addresse;
+  String? description;
   // List services;
 
-  Centre(this.nom);
+  Centre(this.nom, this.addresse, this.description);
 }
