@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
+import 'package:spa/services/centre_services.dart';
 import 'package:spa/services/chaise_services.dart';
 import 'package:spa/services/user_services.dart';
 
 class EspacePersonnelSPA extends StatefulWidget {
-  const EspacePersonnelSPA({Key? key,required this.user, required this.odoo}) : super(key: key);
+  const EspacePersonnelSPA({Key? key, required this.user, required this.odoo})
+      : super(key: key);
 
   final UserLoggedIn user;
   final Odoo? odoo;
@@ -16,7 +18,6 @@ class EspacePersonnelSPA extends StatefulWidget {
 }
 
 class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
-  
   late final UserLoggedIn currentUser;
 
   @override
@@ -24,11 +25,10 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
     super.initState();
     currentUser = widget.user;
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       appBar: AppBar(
         title: Text('Espace SPA'),
         centerTitle: true,
@@ -38,8 +38,11 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
       body: Column(
         children: [
           Text("Espace personnel SPA"),
-          ElevatedButton(onPressed: () {ajouterChaise(currentUser.uid, odoo);}
-          , child: Text('ajouter chaise'))
+          ElevatedButton(
+              onPressed: () {
+                ajouterChaise(currentUser.uid, odoo);
+              },
+              child: Text('ajouter chaise')),
         ],
       ),
     );

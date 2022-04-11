@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
 import 'package:spa/pages/espace_personnel.dart';
 import 'package:spa/parent.dart';
+import 'package:spa/services/centre_services.dart';
 
-Odoo odoo = Odoo(Connection(url: Url(Protocol.http, "192.168.1.6", 8069), db: 'SPA'));
+Odoo odoo =
+    Odoo(Connection(url: Url(Protocol.http, "192.168.1.8", 8069), db: 'SPA'));
 
 Future<Object> login(BuildContext context, TextEditingController email,
     TextEditingController pwd) async {
@@ -19,8 +21,10 @@ Future<Object> login(BuildContext context, TextEditingController email,
               builder: (context) =>
                   EspacePersonnelSPA(user: userLogin, odoo: odoo)));
     } else {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SPA(user: userLogin, odoo: odoo)));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SPA(user: userLogin, odoo: odoo)));
     }
     return true;
   } on Exception catch (e) {
@@ -31,8 +35,16 @@ Future<Object> login(BuildContext context, TextEditingController email,
               title: const Text('Login Invalide'),
               content: const Text('Email ou mot de passe incorrecte.'),
               actionsAlignment: MainAxisAlignment.center,
-              actions: [TextButton(onPressed: () {Navigator.of(context).pop();}, child: const Text('Réssayer',
-              style: TextStyle(fontSize: 17.0),))],
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Réssayer',
+                      style: TextStyle(fontSize: 17.0),
+                    ))
+              ],
             ));
   }
 }
@@ -48,7 +60,12 @@ void creerCompteClient(BuildContext context, TextEditingController nomComplet,
   });
   odoo.disconnect();
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => SPA(user: null, odoo: odoo,)));
+      context,
+      MaterialPageRoute(
+          builder: (context) => SPA(
+                user: null,
+                odoo: odoo,
+              )));
 }
 
 void creerComptePersonnel(
@@ -56,15 +73,24 @@ void creerComptePersonnel(
   TextEditingController nomCentre,
   TextEditingController email,
   TextEditingController mdp,
+  TextEditingController addresse,
 ) async {
   await odoo.connect(Credential("chahinosaiyan@gmail.com", "1272000Ch*"));
+  await ajouterCentre(odoo, nomCentre.text, addresse.text);
+  int idCentre = await getIdDernierCentre(odoo);
   await odoo.insert('res.users', {
     "name": nomCentre.text,
     "login": email.text,
     "password": mdp.text,
+    "personnel_centre": idCentre,
     "user_salon_active": true,
   });
   odoo.disconnect();
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => SPA(user: null, odoo: odoo,)));
+      context,
+      MaterialPageRoute(
+          builder: (context) => SPA(
+                user: null,
+                odoo: odoo,
+              )));
 }

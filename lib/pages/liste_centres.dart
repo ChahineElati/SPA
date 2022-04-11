@@ -17,7 +17,7 @@ class _ListeCentresState extends State<ListeCentres> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Centre>>(
-      future: getCentres(odoo),
+      future: getCentres(widget.odoo),
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.data != null) {
           return ListView.builder(
@@ -26,7 +26,8 @@ class _ListeCentresState extends State<ListeCentres> {
               return centreCard(snapshot.data[index]);
           });
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CircularProgressIndicator());
         }
       },
     );
