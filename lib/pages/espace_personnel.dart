@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
-import 'package:spa/services/centre_services.dart';
 import 'package:spa/services/chaise_services.dart';
+import 'package:spa/services/service_services.dart';
 import 'package:spa/services/user_services.dart';
 
 class EspacePersonnelSPA extends StatefulWidget {
@@ -43,6 +43,11 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                 ajouterChaise(currentUser.uid, odoo);
               },
               child: Text('ajouter chaise')),
+              ElevatedButton(
+              onPressed: () {
+                addService(currentUser.uid, odoo);
+              },
+              child: Text('ajouter service')),
         ],
       ),
     );

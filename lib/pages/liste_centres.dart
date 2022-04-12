@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spa/services/centre_card.dart';
 import 'package:spa/services/service_services.dart';
-import 'package:spa/services/user_services.dart';
 
 import '../models/centre.dart';
 
@@ -21,13 +20,12 @@ class _ListeCentresState extends State<ListeCentres> {
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.data != null) {
           return ListView.builder(
-            itemCount: snapshot.data.length,
-            itemBuilder: (context, index) {
-              return centreCard(snapshot.data[index]);
-          });
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return centreCard(context, snapshot.data[index], widget.odoo);
+              });
         } else {
-          return const Center(
-            child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
