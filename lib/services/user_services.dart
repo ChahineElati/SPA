@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
+import 'package:spa/models/user.dart';
 import 'package:spa/pages/espace_personnel.dart';
 import 'package:spa/parent.dart';
 import 'package:spa/services/centre_services.dart';
 
 Odoo odoo =
-     Odoo(Connection(url: Url(Protocol.http, "192.168.1.8", 8069), db: 'SPA'));
+     Odoo(Connection(url: Url(Protocol.http, "192.168.1.6", 8069), db: 'SPA'));
 
 Future<Object> login(BuildContext context, TextEditingController email,
     TextEditingController pwd) async {
@@ -93,4 +94,9 @@ void creerComptePersonnel(
                 user: null,
                 odoo: odoo,
               )));
+}
+
+Future<User> getUser(id) async {
+  var user = await odoo.read('res.users', id);
+  return User(user!['name'], user['login'], user['password']);
 }

@@ -172,6 +172,8 @@ class _CreerComptePersonnelState extends State<CreerComptePersonnel> {
                               style: TextStyle(fontSize: 20.0),
                             ),
                             style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
                                 fixedSize: const Size(110, 40),
                                 primary: const Color(0xFF34c759)),
                           ),
@@ -190,6 +192,8 @@ class _CreerComptePersonnelState extends State<CreerComptePersonnel> {
                               style: TextStyle(fontSize: 20.0),
                             ),
                             style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
                                 fixedSize: const Size(110, 40),
                                 primary: const Color(0xFF34c759)),
                           ),
