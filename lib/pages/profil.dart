@@ -25,6 +25,11 @@ class _ProfilState extends State<Profil> {
 
   @override
   Widget build(BuildContext context) {
+    void getPasswords(){
+     Future<List> list = widget.odoo!.query(from: 'res.users', select: ['password']);
+     print(list.then((value) => print(value.first)));
+    }
+    getPasswords();
     Future<User> user = getUser(widget.user!.uid);
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -115,6 +120,7 @@ class _ProfilState extends State<Profil> {
                   TextButton.icon(
                       onPressed: () {
                         setState(() {
+                          sendCode("aaaa", widget.user!.username);
                           editerMdp = true;
                         });
                         Future.delayed(Duration(milliseconds: 100), () {
