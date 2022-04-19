@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:odoo/odoo.dart';
 import 'package:spa/api/google_sign_in_api.dart';
 import 'package:spa/services/user_services.dart';
@@ -22,9 +21,6 @@ class _AccueilState extends State<Accueil> {
     return Column(
       children: [
         Text('bienvenu ${widget.user == null ? '' : widget.user?.name}'),
-        ElevatedButton(onPressed: () {
-          sendCode('aaaa', widget.user!.username);
-        }, child: Text('sign in')),
       ],
     );
   }
