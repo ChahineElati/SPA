@@ -1,9 +1,9 @@
+// ignore_for_file: deprecated_member_use, avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 import 'package:odoo/odoo.dart';
-import 'package:spa/api/google_sign_in_api.dart';
 import 'package:spa/models/user.dart';
 import 'package:spa/pages/espace_personnel.dart';
 import 'package:spa/parent.dart';
@@ -113,15 +113,18 @@ Future<int> sendCode(code, rcpEmail) async {
   // final auth = await user.authentication;
   // final token = auth.accessToken!;
 
-  final email = 'chahinosaiyan@gmail.com';
-  final pwd = '1272000ch';
+  const email = 'chahinosaiyan@gmail.com';
+  const pwd = '1272000ch';
   final smtpServer = gmail(email, pwd);
   final message = Message()
-    ..from = Address(email, 'chahine')
+    ..from = const Address(email, 'chahine')
     ..recipients = [rcpEmail]
     ..subject = 'Confirmation Code'
-    ..text =
-        'Type the code below to confirm you are the owner of the account\n- $code';
+    ..html = '''
+              <h1>Confirmation code</h1>
+              <p>Enter this confirmation code in field:</p>
+              <span><font style="font-family: "Times New Roman", Times, serif;">$code<font></span>
+''';
   try {
     await send(message, smtpServer);
     print('email sent');
