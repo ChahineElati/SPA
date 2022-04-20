@@ -25,16 +25,12 @@ class _ProfilState extends State<Profil> {
   FocusNode focusMdp = FocusNode();
   TextEditingController code = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
+  final nom = TextEditingController();
+  final mdp = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    void getPasswords() {
-      Future<List> list =
-          widget.odoo!.query(from: 'res.users', select: ['password']);
-      print(list.then((value) => print(value.first)));
-    }
-
-    getPasswords();
     Future<User> user = getUser(widget.user!.uid);
     return SingleChildScrollView(
       child: Padding(
@@ -59,7 +55,9 @@ class _ProfilState extends State<Profil> {
                 if (snapshot.data != null) {
                   return Form(
                       child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text('Nom et Prénom : ${snapshot.data.nom}'),
                       Row(
                         children: [
                           Text('Modifier votre nom et prénom'),
@@ -80,42 +78,12 @@ class _ProfilState extends State<Profil> {
                         ],
                       ),
                       TextFormField(
+                        controller: nom,
                         onEditingComplete: (() => setState(() {
                               editerNom = false;
                             })),
-                        initialValue: snapshot.data.nom,
                         enabled: editerNom,
                         focusNode: focusNom,
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        children: [
-                          Text('Modifier votre Email'),
-                          TextButton.icon(
-                              onPressed: () {
-                                setState(() {
-                                  editerEmail = true;
-                                });
-                                Future.delayed(Duration(milliseconds: 100), () {
-                                  focusEmail.requestFocus();
-                                });
-                              },
-                              icon: Icon(
-                                Icons.edit,
-                                size: 15,
-                              ),
-                              label: Text('')),
-                        ],
-                      ),
-                      TextFormField(
-                        onEditingComplete: (() => setState(() {
-                              editerEmail = false;
-                            })),
-                        initialValue: snapshot.data.email,
-                        enabled: editerEmail,
-                        focusNode: focusEmail,
                       ),
                       SizedBox(
                         height: 20.0,
@@ -134,8 +102,8 @@ class _ProfilState extends State<Profil> {
                                               MainAxisAlignment.center,
                                           children: [
                                             AlertDialog(
-                                              title:
-                                                  const Text('Confirmation Code'),
+                                              title: const Text(
+                                                  'Confirmation Code'),
                                               content: Column(
                                                 children: [
                                                   const Text(
@@ -149,13 +117,15 @@ class _ProfilState extends State<Profil> {
                                                                 false,
                                                             autocorrect: false,
                                                             validator: (value) {
-                                                              if (value != code) {
+                                                              if (value !=
+                                                                  code) {
                                                                 return 'incorrecte';
                                                               } else {
                                                                 return null;
                                                               }
                                                             },
-                                                            controller: this.code,
+                                                            controller:
+                                                                this.code,
                                                           ),
                                                           TextButton(
                                                               onPressed: () {
@@ -206,6 +176,7 @@ class _ProfilState extends State<Profil> {
                         ],
                       ),
                       TextFormField(
+                        controller: mdp,
                         obscureText: true,
                         enableSuggestions: false,
                         autocorrect: false,
@@ -215,6 +186,32 @@ class _ProfilState extends State<Profil> {
                         decoration: InputDecoration(hintText: '••••••••'),
                         enabled: editerMdp,
                         focusNode: focusMdp,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                updateUser(widget.user!.uid, nom.text, mdp.text);
+                              },
+                              child: const Text(
+                                'Valider',
+                                style: TextStyle(fontSize: 20.0),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(20.0)),
+                                  fixedSize: const Size(100, 40),
+                                  primary: const Color(0xFF34c759)),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                        ],
                       ),
                     ],
                   ));

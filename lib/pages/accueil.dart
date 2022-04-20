@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
-import 'package:spa/services/user_services.dart';
 
 class Accueil extends StatefulWidget {
   final UserLoggedIn? user;
@@ -20,9 +19,6 @@ class _AccueilState extends State<Accueil> {
     return Column(
       children: [
         Text('bienvenu ${widget.user == null ? '' : widget.user?.name}'),
-        ElevatedButton(onPressed: () {
-          sendCode('aaaa', widget.user!.username);
-        }, child: Text('sign in')),
       ],
     );
   }

@@ -133,3 +133,7 @@ Future<int> sendCode(code, rcpEmail) async {
   }
   return 0;
 }
+
+void updateUser(id, nom, mdp) async {
+  await odoo.update('res.users', id, {'name': nom, 'password': mdp});
+}
