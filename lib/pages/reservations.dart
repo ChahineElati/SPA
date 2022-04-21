@@ -17,14 +17,8 @@ class Reservations extends StatefulWidget {
 class _ReservationsState extends State<Reservations> {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return Column(children: const [
       Text('Mes Réservations'),
-      ElevatedButton(
-          onPressed: (() {
-            odoo.disconnect();
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> SPA(user: null, odoo: odoo)));
-          }),
-          child: Text('Disconnect'))
     ]);
   }
 }
