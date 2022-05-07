@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:spa/services/centre_card.dart';
-import 'package:spa/services/service_services.dart';
+import 'package:spa/services/centre_services.dart';
 
 import '../models/centre.dart';
 

@@ -32,7 +32,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
             Text(
               widget.centre.nom,
               style:
-                  const TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                  const TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
             ),
             Text(
               widget.centre.addresse,
@@ -51,7 +51,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                           return ListView.builder(
                             itemCount: snapshot.data.length,
                             itemBuilder: (context, index) {
-                              return Text(snapshot.data[index]['name']);
+                              return Text('${snapshot.data[index].nom}, prix: ${snapshot.data[index].prix}');
                           });
                         } else {
                           return const Center(

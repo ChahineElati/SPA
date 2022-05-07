@@ -170,6 +170,7 @@ class _CreerCompteState extends State<CreerCompte> {
                     ),
                   ],
                 ),
+                const SizedBox(height: 20.0,),
               ],
             ),
           ),

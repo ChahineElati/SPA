@@ -200,6 +200,7 @@ class _CreerComptePersonnelState extends State<CreerComptePersonnel> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 20.0,),
                   ],
                 ),
               ),
