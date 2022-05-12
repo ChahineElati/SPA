@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spa/pages/informations_centre.dart';
 
-Widget centreCard(context, centre, odoo) {
+Widget centreCard(context, centre, odoo, user) {
 
   return Card(
     child: Column(children: [
@@ -16,7 +16,7 @@ Widget centreCard(context, centre, odoo) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => InformationsCentre(centre: centre, odoo: odoo)));
+                    builder: (context) => InformationsCentre(centre: centre, odoo: odoo, user: user)));
           },
           child: Text(
             'Voir Plus',

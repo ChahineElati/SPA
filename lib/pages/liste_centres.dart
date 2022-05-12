@@ -7,8 +7,9 @@ import 'package:spa/services/centre_services.dart';
 import '../models/centre.dart';
 
 class ListeCentres extends StatefulWidget {
-  const ListeCentres({Key? key, required this.odoo}) : super(key: key);
+  const ListeCentres({Key? key, required this.odoo, required this.user}) : super(key: key);
   final odoo;
+  final user;
 
   @override
   State<ListeCentres> createState() => _ListeCentresState();
@@ -24,7 +25,7 @@ class _ListeCentresState extends State<ListeCentres> {
           return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
-                return centreCard(context, snapshot.data[index], widget.odoo);
+                return centreCard(context, snapshot.data[index], widget.odoo, widget.user);
               });
         } else {
           return const Center(child: CircularProgressIndicator());

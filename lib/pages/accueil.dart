@@ -14,12 +14,16 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> {
+  
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
+
         Text('bienvenu ${widget.user == null ? '' : widget.user?.name}'),
+        Image(image: AssetImage('assets/spa image.jpg'))
       ],
     );
   }

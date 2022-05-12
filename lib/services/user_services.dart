@@ -10,7 +10,7 @@ import 'package:spa/parent.dart';
 import 'package:spa/services/centre_services.dart';
 
 Odoo odoo =
-    Odoo(Connection(url: Url(Protocol.http, "192.168.1.6", 8069), db: 'SPA'));
+    Odoo(Connection(url: Url(Protocol.http, "172.16.1.30", 8069), db: 'SPA'));
 
 Future<Object> login(BuildContext context, TextEditingController email,
     TextEditingController pwd) async {

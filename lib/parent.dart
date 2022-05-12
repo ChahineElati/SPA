@@ -6,7 +6,7 @@ import 'package:spa/pages/accueil.dart';
 import 'package:spa/pages/liste_centres.dart';
 import 'package:spa/pages/login.dart';
 import 'package:spa/pages/profil.dart';
-import 'package:spa/pages/reservations.dart';
+import 'package:spa/pages/liste_reservations.dart';
 import 'package:spa/services/user_services.dart';
 import 'package:spa/strings.dart';
 
@@ -54,8 +54,8 @@ class _SPAState extends State<SPA> {
               odoo: widget.odoo,
             ),
             widget.user == null
-                ? ListeCentres(odoo: odoo)
-                : ListeCentres(odoo: widget.odoo),
+                ? ListeCentres(odoo: odoo, user: widget.user)
+                : ListeCentres(odoo: widget.odoo, user: widget.user),
             widget.user == null
                 ? Login()
                 : Reservations(
