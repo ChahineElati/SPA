@@ -42,7 +42,7 @@ class _SPAState extends State<SPA> {
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey.shade200,
       body: Padding(
-        padding: EdgeInsets.only(left: 7.0),
+        padding: EdgeInsets.only(left: 0.0),
         child: PageView(
           controller: _pageController,
           onPageChanged: (index) {

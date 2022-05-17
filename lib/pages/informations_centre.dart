@@ -80,7 +80,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              Reservation(odoo: widget.odoo,)));
+                                              Reservation(odoo: widget.odoo, centre: widget.centre,)));
                                 } else {
                                   showDialog(
                                       context: context,

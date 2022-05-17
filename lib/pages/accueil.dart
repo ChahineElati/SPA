@@ -22,8 +22,8 @@ class _AccueilState extends State<Accueil> {
     return Column(
       children: [
 
+        Image(image: AssetImage('assets/spa image.jpg')),
         Text('bienvenu ${widget.user == null ? '' : widget.user?.name}'),
-        Image(image: AssetImage('assets/spa image.jpg'))
       ],
     );
   }
