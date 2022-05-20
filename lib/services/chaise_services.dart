@@ -15,7 +15,6 @@ Future<List> getchairsBySpaId(int id, Odoo odoo) async {
   ], where: [
     ['spa_id', '=', id]
   ]);
-  print(chairs.first['name']);
   listChairs = chairs.map((value) => Chair(value['id'], value['name'])).toList();
   return listChairs;
 }

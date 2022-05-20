@@ -79,8 +79,12 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              Reservation(odoo: widget.odoo, centre: widget.centre,)));
+                                          builder: (context) => Reservation(
+                                                odoo: widget.odoo,
+                                                centre: widget.centre,
+                                                service: snapshot.data[index],
+                                                user: widget.user,
+                                              )));
                                 } else {
                                   showDialog(
                                       context: context,
@@ -96,7 +100,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                                     Navigator.of(context).pop();
                                                   },
                                                   child: const Text(
-                                                    'Continuer',
+                                                    'Fermer',
                                                     style: TextStyle(
                                                         fontSize: 17.0),
                                                   ))
@@ -104,6 +108,12 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                           ));
                                 }
                               },
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(20.0)),
+                                  fixedSize: const Size(90, 40),
+                                  primary: const Color(0xFF34c759)),
                               child: const Text('Réserver'),
                             ),
                           );

@@ -106,13 +106,7 @@ Future<User> getUser(id) async {
 }
 
 Future<int> sendCode(code, rcpEmail) async {
-  // GoogleSignInApi.logOut();
-  // return 0;
-  // final user = await GoogleSignInApi.login();
-  // if (user == null) return 0;
-  // final auth = await user.authentication;
-  // final token = auth.accessToken!;
-
+  
   const email = 'chahinosaiyan@gmail.com';
   const pwd = '1272000ch';
   final smtpServer = gmail(email, pwd);

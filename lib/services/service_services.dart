@@ -11,7 +11,7 @@ void addService(int id,Odoo odoo) async {
     var fetchedServices = await odoo.query(from: 'salon.service', select: [], where: [['spa_id', '=', id]]);
     List<Service> services = [];
     for (var service in fetchedServices) {
-      services.add(Service(service['name'], service['price'], service['time_taken']));
+      services.add(Service(service['id'], service['name'], service['price'], service['time_taken']));
     } 
     return services;
   }
