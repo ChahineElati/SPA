@@ -1,11 +1,13 @@
-void book(odoo, user, chairId, serviceId, date) async {
+void book(odoo, user, chairId, servicesIds, date, double prixTotal) async {
   await odoo.insert('salon.booking', {
     'name': user.name,
     'email': user.username,
     'chair_id': chairId,
-    'services': [serviceId],
+    'services': servicesIds,
     'time': date,
+    'state': 'approved',
   });
+  
 }
 
 Future<bool> verifierTempsReservation(
@@ -27,6 +29,5 @@ Future<bool> verifierTempsReservation(
       isReserved = false;
     }
   }
-  print(isReserved);
   return isReserved;
 }

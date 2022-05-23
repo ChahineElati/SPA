@@ -4,6 +4,7 @@ import 'package:spa/models/service.dart';
 import 'package:spa/services/book.dart';
 import 'package:spa/services/chaise_services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:spa/services/service_services.dart';
 import 'package:spa/services/service_template.dart';
 
 class Reservation extends StatefulWidget {
@@ -40,11 +41,15 @@ class _ReservationState extends State<Reservation> {
   String annee = "AAAA";
   String mois = "MM";
   String jour = "JJ";
+  late double prix_total;
 
   late List<Service> services;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
+    prix_total = widget.service.prix;
     services = [widget.service];
     super.initState();
   }
@@ -53,6 +58,7 @@ class _ReservationState extends State<Reservation> {
   Widget build(BuildContext context) {
     getchairsBySpaId(widget.centre.id, widget.odoo);
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('Réservation'),
         centerTitle: true,
@@ -89,13 +95,113 @@ class _ReservationState extends State<Reservation> {
                     ],
                   ),
                   const SizedBox(
-                        height: 5.0,
-                      ),
+                    height: 5.0,
+                  ),
                   ListView(
                     children: serviceTemplate(services),
                     shrinkWrap: true,
                   ),
-                  TextButton(onPressed: (){}, child: Row(children: const [ Icon(Icons.add), Text('Ajouter un autre service')],)),
+                  TextButton(
+                      onPressed: () async {
+                        List<Service> list =
+                            await getServices(widget.centre.id, widget.odoo)
+                                .then((value) => value);
+                        List<Widget> listTemplate = list
+                            .map((Service service) => Card(
+                                  child: Column(
+                                    children: [
+                                      ListTile(
+                                        title: TextButton(
+                                          child: Text(
+                                            service.nom,
+                                            style: const TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.black),
+                                          ),
+                                          onPressed: () {
+                                            if (!checkIfExists(
+                                                services, service)) {
+                                              setState(() {
+                                                services.add(service);
+                                                prix_total += service.prix;
+                                                Navigator.of(context).pop();
+                                              });
+                                            } else {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      AlertDialog(
+                                                        actionsAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        actions: [
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                              child: const Text(
+                                                                'Fermer',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        18.0,
+                                                                    color: Colors
+                                                                        .black),
+                                                              ))
+                                                        ],
+                                                        content: const Center(
+                                                          heightFactor: 2,
+                                                          child: Text(
+                                                            'Service Déjà ajouté',
+                                                            style: TextStyle(
+                                                                fontSize: 18.0),
+                                                          ),
+                                                        ),
+                                                        backgroundColor:
+                                                            Colors.red[300],
+                                                      ));
+                                            }
+                                          },
+                                        ),
+                                        trailing: Text('${service.prix} Dt'),
+                                      ),
+                                    ],
+                                  ),
+                                ))
+                            .toList();
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Ajouter un service'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text(
+                                          'Retourner',
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              color: Colors.green),
+                                        ))
+                                  ],
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      children: listTemplate,
+                                    ),
+                                  ),
+                                ));
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.add),
+                          Text('Ajouter un autre service')
+                        ],
+                      )),
                   const SizedBox(
                     height: 15.0,
                   ),
@@ -219,7 +325,7 @@ class _ReservationState extends State<Reservation> {
                   Padding(
                     padding: const EdgeInsets.only(left: 210.0),
                     child: Text(
-                      'Total : ${widget.service.prix}',
+                      'Total : ${prix_total.toStringAsFixed(2)} Dt',
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -230,15 +336,70 @@ class _ReservationState extends State<Reservation> {
                     child: ElevatedButton(
                       onPressed: () async {
                         bool isReserved = await verifierTempsReservation(
-                            widget.odoo,
-                            dropDownValue,
-                            '$annee-$mois-$jour',
-                            time);
-                        if (!isReserved) {
-                          book(widget.odoo, widget.user, dropDownValue,
-                              widget.service.id, '$annee-$mois-$jour $time:00');
+                          widget.odoo,
+                          dropDownValue,
+                          '$annee-$mois-$jour',
+                          time,
+                        );
+                        if (dropDownValue!=0 && jour!="JJ" && annee!="AAAA" && mois!="MM") {
+                          if (!isReserved) {
+                            List<int> servicesIds =
+                                services.map((value) => value.id).toList();
+                            book(
+                                widget.odoo,
+                                widget.user,
+                                dropDownValue,
+                                servicesIds,
+                                '$annee-$mois-$jour $time:00',
+                                prix_total);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.greenAccent[400],
+                              behavior: SnackBarBehavior.floating,
+                              margin: const EdgeInsets.fromLTRB(15, 0, 15, 50),
+                              content: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Text(
+                                    'Réservation succés',
+                                    style: TextStyle(letterSpacing: 1),
+                                  ),
+                                ],
+                              ),
+                              duration: const Duration(seconds: 2),
+                            ));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.redAccent[400],
+                              behavior: SnackBarBehavior.floating,
+                              margin: const EdgeInsets.fromLTRB(15, 0, 15, 50),
+                              content: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Text(
+                                    'Déjà réservé',
+                                    style: TextStyle(letterSpacing: 1),
+                                  ),
+                                ],
+                              ),
+                              duration: const Duration(seconds: 2),
+                            ));
+                          }
                         } else {
-                          print('déjà réservée');
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.redAccent[400],
+                              behavior: SnackBarBehavior.floating,
+                              margin: const EdgeInsets.fromLTRB(15, 0, 15, 50),
+                              content: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Text(
+                                    'Veillez indiquer tout les champs',
+                                    style: TextStyle(letterSpacing: 1),
+                                  ),
+                                ],
+                              ),
+                              duration: const Duration(seconds: 2),
+                            ));
                         }
                       },
                       child: const Text('Réserver'),
@@ -274,4 +435,15 @@ List<DropdownMenuItem<int>> _dropDownItem(list) {
         enabled: false,
       ));
   return data;
+}
+
+bool checkIfExists(services, service) {
+  bool exists = false;
+  for (var currService in services) {
+    if (currService.id == service.id) {
+      exists = true;
+      break;
+    }
+  }
+  return exists;
 }

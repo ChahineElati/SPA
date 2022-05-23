@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:spa/pages/r%C3%A9servation.dart';
+import 'package:spa/services/rating_service.dart';
 import 'package:spa/services/service_services.dart';
 import 'package:spa/services/user_services.dart';
 
@@ -37,6 +39,29 @@ class _InformationsCentreState extends State<InformationsCentre> {
               widget.centre.nom,
               style:
                   const TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Evaluer : ', style: TextStyle(fontSize: 15),),
+                RatingBar.builder(
+                  itemSize: 15,
+                  initialRating: 3,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  allowHalfRating: false,
+                  itemCount: 5,
+                  itemPadding:  const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {
+                    checkIfrated(widget.odoo, widget.user.uid, widget.centre.id);
+                    updateRating(widget.odoo, widget.centre.id, rating, widget.user.uid);
+                  },
+                ),
+              ],
             ),
             Text(
               widget.centre.addresse,

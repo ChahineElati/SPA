@@ -106,7 +106,6 @@ Future<User> getUser(id) async {
 }
 
 Future<int> sendCode(code, rcpEmail) async {
-  
   const email = 'chahinosaiyan@gmail.com';
   const pwd = '1272000ch';
   final smtpServer = gmail(email, pwd);
