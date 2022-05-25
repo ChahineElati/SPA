@@ -12,7 +12,6 @@ void updateRating(Odoo odoo, centreId, rating, userId) async {
 
   Set<int> li = Set<int>.from(fetchedUser[0]['ratings']);
   li.add(fetchedRating[0]['id']);
-  print('type: $li');
 
   List list = fetchedRating[0]['user_id'];
   list.add(userId);
@@ -57,10 +56,19 @@ Future<bool> checkIfrated(Odoo odoo, userId, centreId) async {
   ]);
 
   if (user[0]['ratings'].contains(rating[0]['id'])) {
-    print(true);
     return true;
   } else {
-    print(false);
     return false;
   }
 }
+
+Future<int> getLastRatingId(Odoo odoo) async {
+  var id = await odoo.query(
+    from: 'salon.rating',
+    select: ['id'],
+    orderBy: 'id DESC',
+    limit: 1,
+  );
+  return id[0]['id'];
+}
+

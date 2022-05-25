@@ -1,11 +1,12 @@
 import 'package:odoo/odoo.dart';
 import 'package:spa/models/centre.dart';
 
-Future<void> ajouterCentre(Odoo odoo, String nomCentre, String addresse) async {
+Future<void> ajouterCentre(Odoo odoo, String nomCentre, String addresse, int ratingId) async {
   await odoo.insert('salon.centre', {
     'name': nomCentre,
     'address': addresse,
     'description': '',
+    'salon_rating': ratingId,
   });
 }
 

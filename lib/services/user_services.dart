@@ -8,6 +8,7 @@ import 'package:spa/models/user.dart';
 import 'package:spa/pages/espace_personnel.dart';
 import 'package:spa/parent.dart';
 import 'package:spa/services/centre_services.dart';
+import 'package:spa/services/rating_service.dart';
 
 Odoo odoo =
     Odoo(Connection(url: Url(Protocol.http, "localhost", 8069), db: 'SPA'));
@@ -81,7 +82,9 @@ void creerComptePersonnel(
   TextEditingController addresse,
 ) async {
   await odoo.connect(Credential("chahinosaiyan@gmail.com", "1272000Ch*"));
-  await ajouterCentre(odoo, nomCentre.text, addresse.text);
+  await odoo.insert('salon.rating', {});
+  int id = await getLastRatingId(odoo);
+  await ajouterCentre(odoo, nomCentre.text, addresse.text, id);
   int idCentre = await getIdDernierCentre(odoo);
   await odoo.insert('res.users', {
     "name": nomCentre.text,
@@ -90,6 +93,8 @@ void creerComptePersonnel(
     "personnel_centre": idCentre,
     "user_salon_active": true,
   });
+  
+  
   odoo.disconnect();
   Navigator.push(
       context,

@@ -5,7 +5,6 @@ import 'package:spa/services/rating_service.dart';
 import '../main.dart';
 
 Widget centreCard(context, centre, odoo, user) {
-
   return Card(
     child: Column(children: [
       ListTile(
@@ -16,12 +15,15 @@ Widget centreCard(context, centre, odoo, user) {
       ),
       TextButton(
           onPressed: () async {
-            bool isRated = await checkIfrated(odoo, user.uid, centre.id);
-            await session.set('isRated', isRated);
+            if (user != null) {
+              bool isRated = await checkIfrated(odoo, user.uid, centre.id);
+              session.set('isRated', isRated);
+            }
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => InformationsCentre(centre: centre, odoo: odoo, user: user)));
+                    builder: (context) => InformationsCentre(
+                        centre: centre, odoo: odoo, user: user)));
           },
           child: Text(
             'Voir Plus',

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:spa/main.dart';
 import 'package:spa/pages/r%C3%A9servation.dart';
 import 'package:spa/services/rating_service.dart';
 import 'package:spa/services/service_services.dart';
@@ -18,7 +19,24 @@ class InformationsCentre extends StatefulWidget {
 }
 
 class _InformationsCentreState extends State<InformationsCentre> {
-  
+  var rated = false;
+
+  Future<bool> getRated() async {
+    return await session.get('isRated');
+  }
+
+  @override
+  void initState() {
+    getRated().then((value) {
+      if (value) {
+        setState(() {
+          rated = value;
+        });
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +66,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                   style: TextStyle(fontSize: 15),
                 ),
                 RatingBar.builder(
+                  ignoreGestures: rated,
                   itemSize: 15,
                   initialRating: 0,
                   minRating: 1,
@@ -60,11 +79,14 @@ class _InformationsCentreState extends State<InformationsCentre> {
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) async {
-                    bool israted = await checkIfrated(
-                        widget.odoo, widget.user.uid, widget.centre.id);
-                    if (!israted) {
-                      updateRating(widget.odoo, widget.centre.id, rating,
-                          widget.user.uid);
+                    if (widget.user != null && widget.user.uid != 2) {
+                      if (!rated) {
+                        setState(() {
+                          rated = true;
+                        });
+                        updateRating(widget.odoo, widget.centre.id, rating,
+                            widget.user.uid);
+                      }
                     }
                   },
                 ),

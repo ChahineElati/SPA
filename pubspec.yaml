@@ -40,7 +40,7 @@ dependencies:
   mailer: ^5.1.0
   flutter_datetime_picker: ^1.5.1
   flutter_rating_bar: ^4.0.1
-  flutter_session: ^0.0.7
+  flutter_session_manager: ^1.0.2
 
 dev_dependencies:
   flutter_test:
