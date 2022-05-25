@@ -5,7 +5,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:spa/pages/r%C3%A9servation.dart';
 import 'package:spa/services/rating_service.dart';
 import 'package:spa/services/service_services.dart';
-import 'package:spa/services/user_services.dart';
 
 class InformationsCentre extends StatefulWidget {
   const InformationsCentre(
@@ -19,6 +18,7 @@ class InformationsCentre extends StatefulWidget {
 }
 
 class _InformationsCentreState extends State<InformationsCentre> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,22 +43,29 @@ class _InformationsCentreState extends State<InformationsCentre> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text('Evaluer : ', style: TextStyle(fontSize: 15),),
+                const Text(
+                  'Evaluer ',
+                  style: TextStyle(fontSize: 15),
+                ),
                 RatingBar.builder(
                   itemSize: 15,
-                  initialRating: 3,
+                  initialRating: 0,
                   minRating: 1,
                   direction: Axis.horizontal,
                   allowHalfRating: false,
                   itemCount: 5,
-                  itemPadding:  const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                   itemBuilder: (context, _) => const Icon(
                     Icons.star,
                     color: Colors.amber,
                   ),
-                  onRatingUpdate: (rating) {
-                    checkIfrated(widget.odoo, widget.user.uid, widget.centre.id);
-                    updateRating(widget.odoo, widget.centre.id, rating, widget.user.uid);
+                  onRatingUpdate: (rating) async {
+                    bool israted = await checkIfrated(
+                        widget.odoo, widget.user.uid, widget.centre.id);
+                    if (!israted) {
+                      updateRating(widget.odoo, widget.centre.id, rating,
+                          widget.user.uid);
+                    }
                   },
                 ),
               ],

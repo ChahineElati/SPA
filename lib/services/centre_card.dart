@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spa/pages/informations_centre.dart';
+import 'package:spa/services/rating_service.dart';
+
+import '../main.dart';
 
 Widget centreCard(context, centre, odoo, user) {
 
@@ -12,7 +15,9 @@ Widget centreCard(context, centre, odoo, user) {
         subtitle: Text(centre.addresse.toString()),
       ),
       TextButton(
-          onPressed: () {
+          onPressed: () async {
+            bool isRated = await checkIfrated(odoo, user.uid, centre.id);
+            await session.set('isRated', isRated);
             Navigator.push(
                 context,
                 MaterialPageRoute(
