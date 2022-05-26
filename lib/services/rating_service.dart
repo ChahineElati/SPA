@@ -1,5 +1,4 @@
 import 'package:odoo/odoo.dart';
-import 'package:spa/models/rating.dart';
 
 void updateRating(Odoo odoo, centreId, rating, userId) async {
   var fetchedRating =
@@ -86,5 +85,13 @@ Future<String> averageRating(Odoo odoo, centreId) async {
       (totalStar4 * 4) +
       (totalStar5 * 5);
   double averageRating = ratingSum / totalRating;
-  return averageRating.toStringAsFixed(2);
+  if (!averageRating.isNaN) {
+    await odoo
+        .update('salon.centre', centreId, {'avg_rating': averageRating});
+        return averageRating.toStringAsFixed(2);
+  }
+  else {
+    return "0.00";
+  }
+  
 }

@@ -3,7 +3,7 @@ class Centre {
   String nom;
   String? addresse;
   String? description;
-  // List services;
+  double avgRating;
 
-  Centre(this.nom, this.addresse, this.description, this.id);
+  Centre(this.nom, this.addresse, this.description, this.id, this.avgRating);
 }

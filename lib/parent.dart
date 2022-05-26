@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:odoo/odoo.dart';
 import 'package:spa/main.dart';
 import 'package:spa/pages/accueil.dart';

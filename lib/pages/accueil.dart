@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
+import 'package:spa/models/centre.dart';
+import 'package:spa/services/centre_card.dart';
+import 'package:spa/services/centre_services.dart';
 
 class Accueil extends StatefulWidget {
   final UserLoggedIn? user;
@@ -18,6 +21,7 @@ class _AccueilState extends State<Accueil> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
@@ -40,11 +44,10 @@ class _AccueilState extends State<Accueil> {
                           ),
                           width: 250,
                           height: 250,
-                            child: Image(
-                                image: AssetImage('assets/logo1.jpg'),
-                                fit: BoxFit.contain),
-                        
-                            ),
+                          child: Image(
+                              image: AssetImage('assets/logo1.jpg'),
+                              fit: BoxFit.contain),
+                        ),
                         Text(
                           'SPA BOOKING',
                           style: TextStyle(
@@ -56,8 +59,112 @@ class _AccueilState extends State<Accueil> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text('Les meuilleurs Centres SPA',
+                style: TextStyle(fontSize: 25)),
+          ),
+          FutureBuilder<List<Centre>>(
+            future: getTop3Centres(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.data != null) {
+                return ListView.builder(
+                    primary: false,
+                    shrinkWrap: true,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                          margin: EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 500,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.spa,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        snapshot.data[index].nom,
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                height: 75,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10)),
+                                  color: Color(0xff008a00),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.location_on,
+                                          color: Color(0xff008a00),
+                                        ),
+                                        Text(
+                                          'localisation : ',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 17),
+                                        ),
+                                        Text(
+                                          '${snapshot.data[index].addresse}',
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 23),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Note : ',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 17),
+                                          ),
+                                          Text(
+                                            '${snapshot.data[index].avgRating.toStringAsFixed(2)}',
+                                            style: TextStyle(fontSize: 17),
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.yellow.shade700,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ));
+                    });
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
           ),
         ],
       ),
