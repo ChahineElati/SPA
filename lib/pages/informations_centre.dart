@@ -34,6 +34,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
         });
       }
     });
+    averageRating(widget.odoo, widget.centre.id);
     super.initState();
   }
 
@@ -58,6 +59,20 @@ class _InformationsCentreState extends State<InformationsCentre> {
               style:
                   const TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
             ),
+            FutureBuilder<String>(
+              future: averageRating(widget.odoo, widget.centre.id),
+              builder: (context, AsyncSnapshot snapshot){
+                if (snapshot.hasData) {
+                  return Row(
+                    children: [
+                      Text('Avis moyenne ${snapshot.data} ', style: const TextStyle(fontSize: 20),),
+                      Icon(Icons.star, color: Colors.yellow.shade700, size: 23,),
+                    ],
+                  );
+                } else {
+                  return const Text('');
+                }
+              }),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -92,6 +107,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                 ),
               ],
             ),
+            rated == true ? widget.user!=null ? const Text('vous avez évalué ce centre') : const Text('Veillez connecter pour évaluer') : const Text(''),
             Text(
               widget.centre.addresse,
               style: const TextStyle(color: Colors.grey),

@@ -14,17 +14,53 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> {
-  
-
   @override
   Widget build(BuildContext context) {
-
-    return Column(
-      children: [
-
-        Image(image: AssetImage('assets/spa image.jpg')),
-        Text('bienvenu ${widget.user == null ? '' : widget.user?.name}'),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              Image(
+                image: AssetImage('assets/spa.jpg'),
+                fit: BoxFit.fitHeight,
+                height: 490,
+              ),
+              Container(
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.only(top: 10),
+                child: SizedBox(
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color(0x0fffffff).withOpacity(0.4),
+                            borderRadius: BorderRadius.circular(150),
+                          ),
+                          width: 250,
+                          height: 250,
+                            child: Image(
+                                image: AssetImage('assets/logo1.jpg'),
+                                fit: BoxFit.contain),
+                        
+                            ),
+                        Text(
+                          'SPA BOOKING',
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

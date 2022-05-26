@@ -29,3 +29,9 @@ Future<List<Centre>> getCentres(Odoo odoo) async {
   }
   return listeCentres;
 }
+
+Future<List<Centre>> getTop3Centres(Odoo odoo) async {
+
+  List<dynamic> centreIds = await odoo.query(from: 'salon.rating', select: [], orderBy: '');
+  return [];
+}

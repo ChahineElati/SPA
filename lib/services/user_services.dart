@@ -11,7 +11,7 @@ import 'package:spa/services/centre_services.dart';
 import 'package:spa/services/rating_service.dart';
 
 Odoo odoo =
-    Odoo(Connection(url: Url(Protocol.http, "localhost", 8069), db: 'SPA'));
+    Odoo(Connection(url: Url(Protocol.http, "192.168.0.110", 8069), db: 'SPA'));
 
 Future<Object> login(BuildContext context, TextEditingController email,
     TextEditingController pwd) async {

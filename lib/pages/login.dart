@@ -83,13 +83,13 @@ class _LoginState extends State<Login> {
                         }
                       },
                       child: const Text(
-                        'Log In',
+                        'S\'identifier',
                         style: TextStyle(fontSize: 20.0),
                       ),
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0)),
-                          fixedSize: const Size(90, 40),
+                          fixedSize: const Size(130, 40),
                           primary: const Color(0xFF34c759)),
                     ),
                   ),

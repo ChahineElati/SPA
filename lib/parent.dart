@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
+import 'package:spa/main.dart';
 import 'package:spa/pages/accueil.dart';
 import 'package:spa/pages/liste_centres.dart';
 import 'package:spa/pages/login.dart';
@@ -38,6 +41,9 @@ class _SPAState extends State<SPA> {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isWindows) {
+      setWindowSize();
+    }
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey.shade200,
