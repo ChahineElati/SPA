@@ -84,7 +84,7 @@ class _ReservationState extends State<Reservation> {
                 children: [
                   Row(
                     children: const [
-                      Icon(Icons.spa, color: Colors.green),
+                      Icon(Icons.spa, color: Color(0xff008a00)),
                       SizedBox(
                         width: 5.0,
                       ),
@@ -198,8 +198,8 @@ class _ReservationState extends State<Reservation> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Icon(Icons.add),
-                          Text('Ajouter un autre service')
+                          Icon(Icons.add, color: Color(0xff008a00)),
+                          Text('Ajouter un autre service', style: TextStyle(color: Color(0xff008a00)),)
                         ],
                       )),
                   const SizedBox(
@@ -208,7 +208,7 @@ class _ReservationState extends State<Reservation> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
-                      Icon(Icons.chair_alt, color: Colors.green),
+                      Icon(Icons.chair_alt, color: Color(0xff008a00)),
                       SizedBox(
                         width: 5.0,
                       ),
@@ -244,7 +244,7 @@ class _ReservationState extends State<Reservation> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
-                      Icon(Icons.calendar_month, color: Colors.green),
+                      Icon(Icons.calendar_month, color: Color(0xff008a00)),
                       SizedBox(
                         width: 5.0,
                       ),
@@ -294,7 +294,7 @@ class _ReservationState extends State<Reservation> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
-                      Icon(Icons.access_time_outlined, color: Colors.green),
+                      Icon(Icons.access_time_outlined, color: Color(0xff008a00)),
                       SizedBox(
                         width: 5.0,
                       ),
@@ -410,7 +410,7 @@ class _ReservationState extends State<Reservation> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0)),
                           fixedSize: const Size(90, 40),
-                          primary: const Color(0xFF34c759)),
+                          primary: const Color.fromARGB(255, 55, 206, 55),),
                     ),
                   ),
                 ],

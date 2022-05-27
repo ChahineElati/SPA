@@ -94,7 +94,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) async {
-                    if (widget.user != null && widget.user.uid != 2) {
+                    if (widget.user!=null && widget.user.uid != 2) {
                       if (!rated) {
                         setState(() {
                           rated = true;
@@ -107,7 +107,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                 ),
               ],
             ),
-            rated == true ? widget.user!=null ? const Text('vous avez évalué ce centre') : const Text('Veillez connecter pour évaluer') : const Text(''),
+            rated == true ? widget.user!=null && widget.user.uid!=2 ? const Text('vous avez évalué ce centre') : const Text('Veillez connecter pour évaluer') : const Text(''),
             Text(
               widget.centre.addresse,
               style: const TextStyle(color: Colors.grey),

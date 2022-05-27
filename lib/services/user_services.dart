@@ -26,7 +26,7 @@ Future<Object> login(BuildContext context, TextEditingController email,
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  EspacePersonnelSPA(user: userLogin, odoo: odoo)));
+                  EspacePersonnelSPA(user: userLogin, odoo: odoo, centreId: userType['personnel_centre'][0])));
     } else {
       Navigator.push(
           context,

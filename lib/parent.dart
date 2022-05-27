@@ -63,13 +63,13 @@ class _SPAState extends State<SPA> {
             widget.user == null
                 ? ListeCentres(odoo: odoo, user: widget.user)
                 : ListeCentres(odoo: widget.odoo, user: widget.user),
-            widget.user == null
+            widget.user == null  || widget.user!.uid == 2
                 ? Login()
                 : Reservations(
                     user: widget.user,
                     odoo: widget.odoo,
                   ),
-            widget.user == null
+            widget.user == null  || widget.user!.uid == 2
                 ? Login()
                 : Profil(user: widget.user, odoo: widget.odoo),
           ],
