@@ -10,9 +10,9 @@ import 'package:spa/pages/espace_personnel.dart';
 import 'package:spa/parent.dart';
 import 'package:spa/services/centre_services.dart';
 import 'package:spa/services/rating_service.dart';
+import 'package:spa/strings.dart';
 
-Odoo odoo =
-    Odoo(Connection(url: Url(Protocol.http, "192.168.0.110", 8069), db: 'SPA'));
+Odoo odoo = Odoo(Connection(url: Url(Protocol.http, host, 8069), db: 'SPA'));
 
 Future<Object> login(BuildContext context, TextEditingController email,
     TextEditingController pwd) async {
@@ -49,7 +49,12 @@ Future<Object> login(BuildContext context, TextEditingController email,
                     },
                     child: const Text(
                       'Réssayer',
-                      style: TextStyle(fontSize: 17.0),
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(
+                          0xff008a00,
+                        ),
+                      ),
                     ))
               ],
             ));
@@ -94,8 +99,7 @@ void creerComptePersonnel(
     "personnel_centre": idCentre,
     "user_salon_active": true,
   });
-  
-  
+
   odoo.disconnect();
   Navigator.push(
       context,

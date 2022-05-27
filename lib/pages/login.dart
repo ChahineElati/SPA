@@ -87,10 +87,11 @@ class _LoginState extends State<Login> {
                         style: TextStyle(fontSize: 20.0),
                       ),
                       style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0)),
-                          fixedSize: const Size(130, 40),
-                          primary: const Color(0xFF34c759)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        fixedSize: const Size(130, 40),
+                        primary: const Color.fromARGB(255, 55, 206, 55),
+                      ),
                     ),
                   ),
                   Container(
@@ -105,7 +106,12 @@ class _LoginState extends State<Login> {
                       child: const Text(
                         'Devenir un client',
                         softWrap: true,
-                        style: TextStyle(fontSize: 15.0),
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Color(
+                              0xff008a00,
+                            ),
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),
@@ -124,7 +130,12 @@ class _LoginState extends State<Login> {
                     child: const Text(
                       'Devenir un personnel SPA',
                       softWrap: true,
-                      style: TextStyle(fontSize: 15.0),
+                      style: TextStyle(
+                            fontSize: 15,
+                            color: Color(
+                              0xff008a00,
+                            ),
+                            fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],

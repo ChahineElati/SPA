@@ -80,7 +80,14 @@ class _ProfilState extends State<Profil> {
                                                 builder: (context) => SPA(
                                                     user: null, odoo: odoo)));
                                       },
-                                      child: Text('Se déconnecter')))
+                                      child: Text(
+                                        'Se déconnecter',
+                                        style: TextStyle(
+                                            color: Color(
+                                              0xff008a00,
+                                            ),
+                                            fontWeight: FontWeight.w600),
+                                      )))
                             ],
                           ),
                           SizedBox(
@@ -88,7 +95,10 @@ class _ProfilState extends State<Profil> {
                           ),
                           Row(
                             children: [
-                              Text('Modifier votre nom et prénom'),
+                              Text(
+                                'Modifier votre nom et prénom',
+                                style: TextStyle(fontSize: 20),
+                              ),
                               TextButton.icon(
                                   onPressed: () {
                                     setState(() {
@@ -101,7 +111,8 @@ class _ProfilState extends State<Profil> {
                                   },
                                   icon: Icon(
                                     Icons.edit,
-                                    size: 15,
+                                    size: 20,
+                                    color: Color(0xff008a00),
                                   ),
                                   label: Text('')),
                             ],
@@ -126,7 +137,10 @@ class _ProfilState extends State<Profil> {
                           ),
                           Row(
                             children: [
-                              Text('Changer votre mot de passe'),
+                              Text(
+                                'Changer votre mot de passe',
+                                style: TextStyle(fontSize: 20),
+                              ),
                               TextButton.icon(
                                   onPressed: () {
                                     String code = generateRandomString(6);
@@ -208,7 +222,8 @@ class _ProfilState extends State<Profil> {
                                   },
                                   icon: Icon(
                                     Icons.edit,
-                                    size: 15,
+                                    size: 20,
+                                    color: Color(0xff008a00),
                                   ),
                                   label: Text('')),
                             ],
@@ -249,11 +264,13 @@ class _ProfilState extends State<Profil> {
                                     style: TextStyle(fontSize: 20.0),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0)),
-                                      fixedSize: const Size(100, 40),
-                                      primary: const Color(0xFF34c759)),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    fixedSize: const Size(100, 40),
+                                    primary:
+                                        const Color.fromARGB(255, 55, 206, 55),
+                                  ),
                                 ),
                               ),
                               SizedBox(

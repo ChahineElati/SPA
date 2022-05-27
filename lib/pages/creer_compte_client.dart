@@ -132,10 +132,21 @@ class _CreerCompteState extends State<CreerCompte> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('Compte Créé avec succés')),
-                            );
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.greenAccent[400],
+                              behavior: SnackBarBehavior.floating,
+                              margin: const EdgeInsets.fromLTRB(15, 0, 15, 50),
+                              content: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Text(
+                                    'Compte créé avec succés',
+                                    style: TextStyle(letterSpacing: 1),
+                                  ),
+                                ],
+                              ),
+                              duration: const Duration(seconds: 2),
+                            ));
                             creerCompteClient(context, nomComplet, email, mdp);
                           }
                         },
@@ -144,9 +155,10 @@ class _CreerCompteState extends State<CreerCompte> {
                           style: TextStyle(fontSize: 20.0),
                         ),
                         style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
                             fixedSize: const Size(110, 40),
-                            primary: const Color(0xFF34c759)),
+                            primary: const Color.fromARGB(255, 55, 206, 55),),
                       ),
                     ),
                     const SizedBox(
@@ -163,14 +175,17 @@ class _CreerCompteState extends State<CreerCompte> {
                           style: TextStyle(fontSize: 20.0),
                         ),
                         style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
                             fixedSize: const Size(110, 40),
-                            primary: const Color(0xFF34c759)),
+                            primary: const Color.fromARGB(255, 55, 206, 55),),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20.0,),
+                const SizedBox(
+                  height: 20.0,
+                ),
               ],
             ),
           ),

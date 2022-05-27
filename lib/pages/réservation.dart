@@ -341,7 +341,10 @@ class _ReservationState extends State<Reservation> {
                           '$annee-$mois-$jour',
                           time,
                         );
-                        if (dropDownValue!=0 && jour!="JJ" && annee!="AAAA" && mois!="MM") {
+                        if (dropDownValue != 0 &&
+                            jour != "JJ" &&
+                            annee != "AAAA" &&
+                            mois != "MM") {
                           if (!isReserved) {
                             List<int> servicesIds =
                                 services.map((value) => value.id).toList();
@@ -386,20 +389,20 @@ class _ReservationState extends State<Reservation> {
                           }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor: Colors.redAccent[400],
-                              behavior: SnackBarBehavior.floating,
-                              margin: const EdgeInsets.fromLTRB(15, 0, 15, 50),
-                              content: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Text(
-                                    'Veillez indiquer tout les champs',
-                                    style: TextStyle(letterSpacing: 1),
-                                  ),
-                                ],
-                              ),
-                              duration: const Duration(seconds: 2),
-                            ));
+                            backgroundColor: Colors.redAccent[400],
+                            behavior: SnackBarBehavior.floating,
+                            margin: const EdgeInsets.fromLTRB(15, 0, 15, 50),
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  'Veillez indiquer tout les champs',
+                                  style: TextStyle(letterSpacing: 1),
+                                ),
+                              ],
+                            ),
+                            duration: const Duration(seconds: 2),
+                          ));
                         }
                       },
                       child: const Text('Réserver'),

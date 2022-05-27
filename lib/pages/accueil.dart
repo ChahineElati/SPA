@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
 import 'package:spa/models/centre.dart';
+import 'package:spa/pages/informations_centre.dart';
 import 'package:spa/services/centre_card.dart';
 import 'package:spa/services/centre_services.dart';
 
@@ -43,7 +44,7 @@ class _AccueilState extends State<Accueil> {
                             borderRadius: BorderRadius.circular(150),
                           ),
                           width: 250,
-                          height: 250,
+                          height: 240,
                           child: Image(
                               image: AssetImage('assets/logo1.jpg'),
                               fit: BoxFit.contain),
@@ -62,10 +63,28 @@ class _AccueilState extends State<Accueil> {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text('Les meuilleurs Centres SPA',
-                style: TextStyle(fontSize: 25)),
+          SizedBox(height: 20),
+          Container(
+            height: 90,
+            width: 1000,
+            decoration: BoxDecoration(
+                border: Border.symmetric(
+                  horizontal: BorderSide(color: Colors.green, width: 2),
+                ),
+                color: Colors.white,
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/title_background.jpg',
+                  ),
+                  fit: BoxFit.cover,
+                )),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(25, 30, 0, 0),
+              child: Text('Les meuilleurs centres SPA',
+                  style: TextStyle(
+                    fontSize: 22,
+                  )),
+            ),
           ),
           FutureBuilder<List<Centre>>(
             future: getTop3Centres(),
@@ -154,6 +173,37 @@ class _AccueilState extends State<Accueil> {
                                           ),
                                         ],
                                       ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        InformationsCentre(
+                                                            centre: snapshot
+                                                                .data[index],
+                                                            odoo: widget.odoo,
+                                                            user:
+                                                                widget.user)));
+                                          },
+                                          child: const Text(
+                                            'Services',
+                                            style: TextStyle(fontSize: 15.0),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        20.0)),
+                                            fixedSize: const Size(85, 40),
+                                            primary: Color.fromARGB(255, 55, 206, 55),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),

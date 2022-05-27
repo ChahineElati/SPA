@@ -84,22 +84,22 @@ class _SPAState extends State<SPA> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Accueil',
-            backgroundColor: Colors.green,
+            backgroundColor: Color.fromARGB(255, 55, 206, 55),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.spa),
             label: 'Centres',
-            backgroundColor: Colors.green,
+            backgroundColor: Color.fromARGB(255, 55, 206, 55),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.edit_calendar_rounded),
             label: 'Mes Réservations',
-            backgroundColor: Colors.green,
+            backgroundColor: Color.fromARGB(255, 55, 206, 55),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'Profil',
-            backgroundColor: Colors.green,
+            backgroundColor: Color.fromARGB(255, 55, 206, 55),
           ),
         ],
       ),

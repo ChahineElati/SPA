@@ -1,6 +1,7 @@
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:odoo/odoo.dart';
 import 'package:spa/models/centre.dart';
+import 'package:spa/strings.dart';
 
 Future<void> ajouterCentre(
     Odoo odoo, String nomCentre, String addresse, int ratingId) async {
@@ -39,7 +40,7 @@ Future<List<Centre>> getTop3Centres() async {
   List<Centre> listeCentres = <Centre>[];
 
   Odoo odoo = Odoo(
-      Connection(url: Url(Protocol.http, "192.168.0.110", 8069), db: 'SPA'));
+      Connection(url: Url(Protocol.http, host, 8069), db: 'SPA'));
   await odoo.connect(Credential("chahinosaiyan@gmail.com", "1272000Ch*"));
 
   List centres = await odoo.query(
