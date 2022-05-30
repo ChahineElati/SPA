@@ -80,6 +80,7 @@ class _LoginState extends State<Login> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           login(context, email, pwd);
+                          pwd.clear();
                         }
                       },
                       child: const Text(

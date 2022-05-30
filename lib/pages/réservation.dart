@@ -63,7 +63,6 @@ class _ReservationState extends State<Reservation> {
         title: const Text('Réservation'),
         centerTitle: true,
         backgroundColor: const Color(0xff008a00),
-        automaticallyImplyLeading: false,
       ),
       body: ListView(
         shrinkWrap: true,
@@ -147,20 +146,22 @@ class _ReservationState extends State<Reservation> {
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         18.0,
-                                                                    color: Colors
-                                                                        .black),
+                                                                    color: Colors.white
+                                                                            ),
                                                               ))
                                                         ],
                                                         content: const Center(
                                                           heightFactor: 2,
                                                           child: Text(
-                                                            'Service Déjà ajouté',
+                                                            'Service déjà ajouté',
                                                             style: TextStyle(
+                                                                color: Colors
+                                                                        .white,
                                                                 fontSize: 18.0),
                                                           ),
                                                         ),
-                                                        backgroundColor:
-                                                            Colors.red[300],
+                                                        backgroundColor: Colors
+                                                            .redAccent[400],
                                                       ));
                                             }
                                           },
@@ -199,7 +200,10 @@ class _ReservationState extends State<Reservation> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
                           Icon(Icons.add, color: Color(0xff008a00)),
-                          Text('Ajouter un autre service', style: TextStyle(color: Color(0xff008a00)),)
+                          Text(
+                            'Ajouter un autre service',
+                            style: TextStyle(color: Color(0xff008a00)),
+                          )
                         ],
                       )),
                   const SizedBox(
@@ -294,7 +298,8 @@ class _ReservationState extends State<Reservation> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
-                      Icon(Icons.access_time_outlined, color: Color(0xff008a00)),
+                      Icon(Icons.access_time_outlined,
+                          color: Color(0xff008a00)),
                       SizedBox(
                         width: 5.0,
                       ),
@@ -407,10 +412,11 @@ class _ReservationState extends State<Reservation> {
                       },
                       child: const Text('Réserver'),
                       style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0)),
-                          fixedSize: const Size(90, 40),
-                          primary: const Color.fromARGB(255, 55, 206, 55),),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        fixedSize: const Size(90, 40),
+                        primary: const Color.fromARGB(255, 55, 206, 55),
+                      ),
                     ),
                   ),
                 ],

@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:odoo/odoo.dart';
 import 'package:spa/models/centre.dart';
 import 'package:spa/pages/informations_centre.dart';
-import 'package:spa/services/centre_card.dart';
 import 'package:spa/services/centre_services.dart';
+import 'package:spa/strings.dart';
 
 class Accueil extends StatefulWidget {
   final UserLoggedIn? user;
@@ -82,7 +84,9 @@ class _AccueilState extends State<Accueil> {
               padding: EdgeInsets.fromLTRB(25, 30, 0, 0),
               child: Text('Les meuilleurs centres SPA',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 19,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Merienda One',
                   )),
             ),
           ),
@@ -95,6 +99,7 @@ class _AccueilState extends State<Accueil> {
                     shrinkWrap: true,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
+                      int random_index = Random().nextInt(spa_images.length);
                       return Card(
                           margin: EdgeInsets.all(10),
                           child: Column(
@@ -184,11 +189,12 @@ class _AccueilState extends State<Accueil> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         InformationsCentre(
-                                                            centre: snapshot
-                                                                .data[index],
-                                                            odoo: widget.odoo,
-                                                            user:
-                                                                widget.user)));
+                                                          centre: snapshot
+                                                              .data[index],
+                                                          odoo: widget.odoo,
+                                                          user: widget.user,
+                                                          image: random_index,
+                                                        )));
                                           },
                                           child: const Text(
                                             'Services',
@@ -200,7 +206,8 @@ class _AccueilState extends State<Accueil> {
                                                     BorderRadius.circular(
                                                         20.0)),
                                             fixedSize: const Size(85, 40),
-                                            primary: Color.fromARGB(255, 55, 206, 55),
+                                            primary: Color.fromARGB(
+                                                255, 55, 206, 55),
                                           ),
                                         ),
                                       ],

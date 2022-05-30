@@ -1,3 +1,5 @@
+import 'package:odoo/odoo.dart';
+
 void book(odoo, user, chairId, servicesIds, date, double prixTotal) async {
   await odoo.insert('salon.booking', {
     'name': user.name,
@@ -5,7 +7,6 @@ void book(odoo, user, chairId, servicesIds, date, double prixTotal) async {
     'chair_id': chairId,
     'services': servicesIds,
     'time': date,
-    'state': 'approved',
   });
   
 }
@@ -30,4 +31,10 @@ Future<bool> verifierTempsReservation(
     }
   }
   return isReserved;
+}
+
+void approve(Odoo odoo) async {
+  int id = await odoo.query(from: 'salon.booking', select: ['id'], orderBy: 'id DESC').then((value) => value[0]['id']);
+  odoo.update('salon.booking', id, {'state':'approved'});
+  print(id);
 }

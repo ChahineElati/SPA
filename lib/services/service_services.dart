@@ -1,10 +1,10 @@
 import 'package:odoo/odoo.dart';
 import 'package:spa/models/service.dart';
 
-void addService(int id,Odoo odoo) async {
+void addService(int id,Odoo odoo, String service, double prix) async {
   var spa = await odoo.read('res.users', id);
   int spaId = spa!['personnel_centre'][0];
-  odoo.insert('salon.service', {'name': 'service1', 'price': 24.9, 'time_taken': 30.5, 'spa_id': spaId});
+  odoo.insert('salon.service', {'name': service, 'price': prix, 'time_taken': 30.5, 'spa_id': spaId});
 }
 
   Future<List<Service>> getServices(int id, Odoo odoo) async {

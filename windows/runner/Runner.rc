@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.chahine_elati.spa" "\0"
+            VALUE "CompanyName", "--platforms=Windows" "\0"
             VALUE "FileDescription", "spa" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "spa" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.chahine_elati.spa. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 --platforms=Windows. All rights reserved." "\0"
             VALUE "OriginalFilename", "spa.exe" "\0"
             VALUE "ProductName", "spa" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

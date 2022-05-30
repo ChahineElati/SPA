@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:spa/pages/informations_centre.dart';
 import 'package:spa/services/rating_service.dart';
+import 'package:spa/strings.dart';
 
 import '../main.dart';
+import 'dart:math';
+
 
 Widget centreCard(context, centre, odoo, user) {
+  int random_index = Random().nextInt(spa_images.length);
   return Card(
     child: Column(children: [
+      Container(
+          height: 100,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(spa_images[random_index]), fit: BoxFit.cover),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(5),
+                topRight: Radius.circular(5),
+              ))),
       ListTile(
         title: Text(centre.nom,
             style:
@@ -23,7 +36,7 @@ Widget centreCard(context, centre, odoo, user) {
                 context,
                 MaterialPageRoute(
                     builder: (context) => InformationsCentre(
-                        centre: centre, odoo: odoo, user: user)));
+                        centre: centre, odoo: odoo, user: user, image: random_index)));
           },
           child: Text(
             'Voir Plus',
