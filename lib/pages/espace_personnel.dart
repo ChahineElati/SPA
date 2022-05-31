@@ -34,25 +34,40 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
   final _formKey = GlobalKey<FormState>();
 
   String selectedService = servicesDisponibles[0];
+  List clients = [];
 
   @override
   void initState() {
     currentUser = widget.user;
+    widget.odoo!.query(from: 'salon.booking', select: [
+      'name',
+      'email',
+      'spa_id'
+    ], where: [
+      ['spa_id', '=', widget.centreId]
+    ]).then((value) {
+      setState(() {
+        clients = value;
+      });
+    });
     super.initState();
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    setState(() {
-      getServices(widget.centreId, widget.odoo!).then((value) {
-        setState(() {
-          services = value;
-        });
+    getServices(widget.centreId, widget.odoo!).then((value) {
+      setState(() {
+        services = value;
       });
-      getchairsBySpaId(widget.centreId, widget.odoo!).then((value) {
-        setState(() {
-          places = value;
-        });
+    });
+    getchairsBySpaId(widget.centreId, widget.odoo!).then((value) {
+      setState(() {
+        places = value;
       });
     });
     return Scaffold(
@@ -79,7 +94,7 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                       color: Colors.purple[700],
                     ),
                     Text(
-                      "Gestion Espace SPA",
+                      widget.user.name,
                       style: TextStyle(
                           fontSize: 30.0, fontWeight: FontWeight.w600),
                     ),
@@ -545,7 +560,7 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                             })
                         : Center(
                             child: Text(
-                            'Aucun service ajouté',
+                            'Aucune place ajouté',
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w600),
                           )),
@@ -621,6 +636,31 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                           )),
                     ],
                   ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.supervisor_account_rounded,
+                          color: Colors.purple[700]),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Vos clients',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: clients.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(clients[index]['name']),
+                        );
+                      })
                 ],
               ),
             ),

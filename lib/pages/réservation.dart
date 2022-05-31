@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, file_names
-
 import 'package:flutter/material.dart';
 import 'package:spa/models/chair.dart';
 import 'package:spa/models/service.dart';
@@ -43,7 +41,7 @@ class _ReservationState extends State<Reservation> {
   String annee = "AAAA";
   String mois = "MM";
   String jour = "JJ";
-  late double prixTotal;
+  late double prix_total;
 
   late List<Service> services;
 
@@ -51,7 +49,7 @@ class _ReservationState extends State<Reservation> {
 
   @override
   void initState() {
-    prixTotal = widget.service.prix;
+    prix_total = widget.service.prix;
     services = [widget.service];
     super.initState();
   }
@@ -85,7 +83,7 @@ class _ReservationState extends State<Reservation> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.spa, color: Colors.purple[700]),
+                      Icon(Icons.spa, color: Colors.purple[700],),
                       const SizedBox(
                         width: 5.0,
                       ),
@@ -124,7 +122,7 @@ class _ReservationState extends State<Reservation> {
                                                 services, service)) {
                                               setState(() {
                                                 services.add(service);
-                                                prixTotal += service.prix;
+                                                prix_total += service.prix;
                                                 Navigator.of(context).pop();
                                               });
                                             } else {
@@ -187,7 +185,7 @@ class _ReservationState extends State<Reservation> {
                                           'Retourner',
                                           style: TextStyle(
                                               fontSize: 15.0,
-                                              color: Colors.purple[700]),
+                                              color: Colors.purple[700],),
                                         ))
                                   ],
                                   actionsAlignment: MainAxisAlignment.center,
@@ -201,10 +199,10 @@ class _ReservationState extends State<Reservation> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.add, color: Colors.purple[700]),
+                          Icon(Icons.add, color: Colors.purple[700],),
                           Text(
                             'Ajouter un autre service',
-                            style: TextStyle(color: Colors.purple[700]),
+                            style: TextStyle(color: Colors.purple[700],),
                           )
                         ],
                       )),
@@ -214,7 +212,7 @@ class _ReservationState extends State<Reservation> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(Icons.chair_alt, color: Colors.purple[700]),
+                      Icon(Icons.chair_alt, color: Colors.purple[700],),
                       const SizedBox(
                         width: 5.0,
                       ),
@@ -250,7 +248,7 @@ class _ReservationState extends State<Reservation> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(Icons.calendar_month, color: Colors.purple[700]),
+                      Icon(Icons.calendar_month, color: Colors.purple[700],),
                       const SizedBox(
                         width: 5.0,
                       ),
@@ -301,7 +299,7 @@ class _ReservationState extends State<Reservation> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(Icons.access_time_outlined,
-                          color: Colors.purple[700]),
+                          color: Colors.purple[700],),
                       const SizedBox(
                         width: 5.0,
                       ),
@@ -332,7 +330,7 @@ class _ReservationState extends State<Reservation> {
                   Padding(
                     padding: const EdgeInsets.only(left: 210.0),
                     child: Text(
-                      'Total : ${prixTotal.toStringAsFixed(2)} Dt',
+                      'Total : ${prix_total.toStringAsFixed(2)} Dt',
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -361,7 +359,7 @@ class _ReservationState extends State<Reservation> {
                                 dropDownValue,
                                 servicesIds,
                                 '$annee-$mois-$jour $time:00',
-                                prixTotal);
+                                prix_total, widget.centre.id);
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               backgroundColor: Colors.greenAccent[400],
                               behavior: SnackBarBehavior.floating,
@@ -417,7 +415,7 @@ class _ReservationState extends State<Reservation> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)),
                         fixedSize: const Size(90, 40),
-                        primary: Colors.purple,
+                        primary: Colors.purple
                       ),
                     ),
                   ),
