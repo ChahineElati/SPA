@@ -78,36 +78,31 @@ class _SPAState extends State<SPA> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: _onItemTapped,
         currentIndex: _selectedIndex,
-        selectedItemColor: Color.fromRGBO(27, 94, 32, 1),
+        selectedItemColor: Colors.purple[900],
         unselectedItemColor: Colors.white,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Accueil',
-            backgroundColor: Color.fromARGB(255, 55, 206, 55),
+            backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.spa),
             label: 'Centres',
-            backgroundColor: Color.fromARGB(255, 55, 206, 55),
+            backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.edit_calendar_rounded),
             label: 'Mes Réservations',
-            backgroundColor: Color.fromARGB(255, 55, 206, 55),
+            backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'Profil',
-            backgroundColor: Color.fromARGB(255, 55, 206, 55),
+            backgroundColor: Colors.purple,
           ),
         ],
-      ),
-      appBar: AppBar(
-        title: Text(pagesNames[_selectedIndex]),
-        centerTitle: true,
-        backgroundColor: Color(0xff008a00),
-        automaticallyImplyLeading: false,
       ),
     );
   }

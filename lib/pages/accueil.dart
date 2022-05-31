@@ -45,10 +45,10 @@ class _AccueilState extends State<Accueil> {
                             color: Color(0x0fffffff).withOpacity(0.4),
                             borderRadius: BorderRadius.circular(150),
                           ),
-                          width: 250,
-                          height: 240,
+                          width: 220,
+                          height: 220,
                           child: Image(
-                              image: AssetImage('assets/logo1.jpg'),
+                              image: AssetImage('assets/spa logo 2.png'),
                               fit: BoxFit.contain),
                         ),
                         Text(
@@ -70,23 +70,24 @@ class _AccueilState extends State<Accueil> {
             height: 90,
             width: 1000,
             decoration: BoxDecoration(
-                border: Border.symmetric(
-                  horizontal: BorderSide(color: Colors.green, width: 2),
-                ),
-                color: Colors.white,
+                // border: Border.symmetric(
+                //   horizontal: BorderSide(color: Colors.green, width: 2),
+                // ),
                 image: DecorationImage(
                   image: AssetImage(
-                    'assets/title_background.jpg',
+                    'assets/text box violet.jpg',
                   ),
                   fit: BoxFit.cover,
                 )),
             child: Padding(
-              padding: EdgeInsets.fromLTRB(25, 30, 0, 0),
-              child: Text('Les meuilleurs centres SPA',
+              padding: EdgeInsets.fromLTRB(10, 30, 0, 0),
+              child: Text('LES MEUILLEURS CENTRES SPA',
                   style: TextStyle(
-                    fontSize: 19,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Merienda One',
+                    letterSpacing: 1.5,
+                    color: Colors.white,
                   )),
             ),
           ),
@@ -99,7 +100,7 @@ class _AccueilState extends State<Accueil> {
                     shrinkWrap: true,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
-                      int random_index = Random().nextInt(spa_images.length);
+                      int randomIndex = Random().nextInt(spa_images.length);
                       return Card(
                           margin: EdgeInsets.all(10),
                           child: Column(
@@ -133,7 +134,7 @@ class _AccueilState extends State<Accueil> {
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10)),
-                                  color: Color(0xff008a00),
+                                  color: Colors.purple[700],
                                 ),
                               ),
                               Padding(
@@ -144,7 +145,7 @@ class _AccueilState extends State<Accueil> {
                                       children: [
                                         Icon(
                                           Icons.location_on,
-                                          color: Color(0xff008a00),
+                                          color: Colors.purple[700],
                                         ),
                                         Text(
                                           'localisation : ',
@@ -193,7 +194,7 @@ class _AccueilState extends State<Accueil> {
                                                               .data[index],
                                                           odoo: widget.odoo,
                                                           user: widget.user,
-                                                          image: random_index,
+                                                          image: randomIndex,
                                                         )));
                                           },
                                           child: const Text(
@@ -206,8 +207,7 @@ class _AccueilState extends State<Accueil> {
                                                     BorderRadius.circular(
                                                         20.0)),
                                             fixedSize: const Size(85, 40),
-                                            primary: Color.fromARGB(
-                                                255, 55, 206, 55),
+                                            primary: Colors.purple
                                           ),
                                         ),
                                       ],

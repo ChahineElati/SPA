@@ -17,7 +17,7 @@ void main() async {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: appName,
-    theme: ThemeData(primarySwatch: Colors.green),
+    theme: ThemeData(primarySwatch: Colors.purple),
     home: SPA(
       user: user,
       odoo: odoo,

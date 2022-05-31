@@ -61,7 +61,7 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
         ),
         title: Text('Espace SPA'),
         centerTitle: true,
-        backgroundColor: Color(0xff008a00),
+        backgroundColor: Colors.purple[700],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -70,11 +70,11 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
               padding: const EdgeInsets.only(top: 20),
               child: Center(
                 child: Column(
-                  children: const [
+                  children: [
                     Icon(
                       Icons.settings_applications,
                       size: 110,
-                      color: Color(0xff008a00),
+                      color: Colors.purple[700],
                     ),
                     Text(
                       "Gestion Espace SPA",
@@ -96,8 +96,8 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    children: const [
-                      Icon(Icons.spa, color: Color(0xff008a00)),
+                    children: [
+                      Icon(Icons.spa, color: Colors.purple[700]),
                       SizedBox(
                         width: 5,
                       ),
@@ -155,11 +155,10 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                                                                       .pop();
                                                                 }
                                                               },
-                                                              child: const Text(
+                                                              child: Text(
                                                                 'Confirmer',
                                                                 style: TextStyle(
-                                                                    color: Color(
-                                                                        0xff008a00),
+                                                                    color: Colors.purple[700],
                                                                     fontSize:
                                                                         15,
                                                                     fontWeight:
@@ -216,7 +215,7 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                                                       ));
                                         },
                                         icon: Icon(Icons.edit,
-                                            color: Color(0xff008a00)),
+                                            color: Colors.purple[700]),
                                       ),
                                       IconButton(
                                           onPressed: () async {
@@ -290,7 +289,7 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                                         child: Text(
                                           "Confirmer",
                                           style: TextStyle(
-                                              color: Color(0xff008a00),
+                                              color: Colors.purple[700],
                                               fontSize: 15,
                                               fontWeight: FontWeight.w600),
                                         ))
@@ -375,12 +374,12 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
-                          Icon(Icons.add, color: Color(0xff008a00)),
+                        children: [
+                          Icon(Icons.add, color: Colors.purple[700]),
                           Text(
                             'Ajouter un service',
                             style: TextStyle(
-                                color: Color(0xff008a00),
+                                color: Colors.purple[700],
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600),
                           ),

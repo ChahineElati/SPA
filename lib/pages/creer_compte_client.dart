@@ -23,7 +23,7 @@ class _CreerCompteState extends State<CreerCompte> {
       appBar: AppBar(
         title: const Text('Inscription'),
         centerTitle: true,
-        backgroundColor: const Color(0xff008a00),
+        backgroundColor: Colors.purple[700],
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
@@ -42,8 +42,8 @@ class _CreerCompteState extends State<CreerCompte> {
                       style: TextStyle(
                           fontSize: 30.0, fontWeight: FontWeight.bold),
                     )),
-                const Icon(Icons.account_circle_rounded,
-                    size: 150, color: Color(0xff008a00)),
+                Icon(Icons.account_circle_rounded,
+                    size: 150, color: Colors.purple[700]),
                 SizedBox(
                   width: 300,
                   child: TextFormField(
@@ -155,10 +155,11 @@ class _CreerCompteState extends State<CreerCompte> {
                           style: TextStyle(fontSize: 20.0),
                         ),
                         style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            fixedSize: const Size(110, 40),
-                            primary: const Color.fromARGB(255, 55, 206, 55),),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          fixedSize: const Size(110, 40),
+                          primary: Colors.purple,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -175,10 +176,11 @@ class _CreerCompteState extends State<CreerCompte> {
                           style: TextStyle(fontSize: 20.0),
                         ),
                         style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            fixedSize: const Size(110, 40),
-                            primary: const Color.fromARGB(255, 55, 206, 55),),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          fixedSize: const Size(110, 40),
+                          primary: Colors.purple,
+                        ),
                       ),
                     ),
                   ],

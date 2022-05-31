@@ -35,8 +35,8 @@ class _LoginState extends State<Login> {
                     style:
                         TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                   )),
-              const Icon(Icons.account_circle_rounded,
-                  size: 150, color: Color(0xff008a00)),
+              Icon(Icons.account_circle_rounded,
+                  size: 150, color: Colors.purple[700]),
               SizedBox(
                 width: 300,
                 child: TextFormField(
@@ -91,7 +91,7 @@ class _LoginState extends State<Login> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)),
                         fixedSize: const Size(130, 40),
-                        primary: const Color.fromARGB(255, 55, 206, 55),
+                        primary: Colors.purple,
                       ),
                     ),
                   ),
@@ -104,14 +104,12 @@ class _LoginState extends State<Login> {
                             MaterialPageRoute(
                                 builder: (context) => const CreerCompte()));
                       },
-                      child: const Text(
+                      child: Text(
                         'Devenir un client',
                         softWrap: true,
                         style: TextStyle(
                             fontSize: 15,
-                            color: Color(
-                              0xff008a00,
-                            ),
+                            color: Colors.purple[700],
                             fontWeight: FontWeight.w600),
                       ),
                     ),
@@ -128,15 +126,13 @@ class _LoginState extends State<Login> {
                               builder: (context) =>
                                   const CreerComptePersonnel()));
                     },
-                    child: const Text(
+                    child: Text(
                       'Devenir un personnel SPA',
                       softWrap: true,
                       style: TextStyle(
-                            fontSize: 15,
-                            color: Color(
-                              0xff008a00,
-                            ),
-                            fontWeight: FontWeight.w600),
+                          fontSize: 15,
+                          color: Colors.purple[700],
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],

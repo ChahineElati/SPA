@@ -46,8 +46,8 @@ class _ProfilState extends State<Profil> {
               ),
             ),
             Center(
-              child: const Icon(Icons.account_circle_rounded,
-                  size: 110, color: Color(0xff008a00)),
+              child: Icon(Icons.account_circle_rounded,
+                  size: 110, color: Colors.purple[700]),
             ),
             SizedBox(
               height: 20.0,
@@ -83,9 +83,7 @@ class _ProfilState extends State<Profil> {
                                       child: Text(
                                         'Se déconnecter',
                                         style: TextStyle(
-                                            color: Color(
-                                              0xff008a00,
-                                            ),
+                                            color: Colors.purple[700],
                                             fontWeight: FontWeight.w600),
                                       )))
                             ],
@@ -112,7 +110,7 @@ class _ProfilState extends State<Profil> {
                                   icon: Icon(
                                     Icons.edit,
                                     size: 20,
-                                    color: Color(0xff008a00),
+                                    color: Colors.purple[700],
                                   ),
                                   label: Text('')),
                             ],
@@ -223,7 +221,7 @@ class _ProfilState extends State<Profil> {
                                   icon: Icon(
                                     Icons.edit,
                                     size: 20,
-                                    color: Color(0xff008a00),
+                                    color: Colors.purple[700],
                                   ),
                                   label: Text('')),
                             ],
@@ -269,7 +267,7 @@ class _ProfilState extends State<Profil> {
                                             BorderRadius.circular(20.0)),
                                     fixedSize: const Size(100, 40),
                                     primary:
-                                        const Color.fromARGB(255, 55, 206, 55),
+                                        Colors.purple,
                                   ),
                                 ),
                               ),

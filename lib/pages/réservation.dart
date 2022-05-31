@@ -45,7 +45,7 @@ class _ReservationState extends State<Reservation> {
 
   late List<Service> services;
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _ReservationState extends State<Reservation> {
       appBar: AppBar(
         title: const Text('Réservation'),
         centerTitle: true,
-        backgroundColor: const Color(0xff008a00),
+        backgroundColor: Colors.purple[700],
       ),
       body: ListView(
         shrinkWrap: true,
@@ -82,12 +82,12 @@ class _ReservationState extends State<Reservation> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    children: const [
-                      Icon(Icons.spa, color: Color(0xff008a00)),
-                      SizedBox(
+                    children: [
+                      Icon(Icons.spa, color: Colors.purple[700]),
+                      const SizedBox(
                         width: 5.0,
                       ),
-                      Text(
+                      const Text(
                         'Services : ',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -181,11 +181,11 @@ class _ReservationState extends State<Reservation> {
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: const Text(
+                                        child: Text(
                                           'Retourner',
                                           style: TextStyle(
                                               fontSize: 15.0,
-                                              color: Colors.green),
+                                              color: Colors.purple[700]),
                                         ))
                                   ],
                                   actionsAlignment: MainAxisAlignment.center,
@@ -198,11 +198,11 @@ class _ReservationState extends State<Reservation> {
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(Icons.add, color: Color(0xff008a00)),
+                        children: [
+                          Icon(Icons.add, color: Colors.purple[700]),
                           Text(
                             'Ajouter un autre service',
-                            style: TextStyle(color: Color(0xff008a00)),
+                            style: TextStyle(color: Colors.purple[700]),
                           )
                         ],
                       )),
@@ -211,12 +211,12 @@ class _ReservationState extends State<Reservation> {
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.chair_alt, color: Color(0xff008a00)),
-                      SizedBox(
+                    children: [
+                      Icon(Icons.chair_alt, color: Colors.purple[700]),
+                      const SizedBox(
                         width: 5.0,
                       ),
-                      Text(
+                      const Text(
                         'Choisir la place:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -247,12 +247,12 @@ class _ReservationState extends State<Reservation> {
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.calendar_month, color: Color(0xff008a00)),
-                      SizedBox(
+                    children: [
+                      Icon(Icons.calendar_month, color: Colors.purple[700]),
+                      const SizedBox(
                         width: 5.0,
                       ),
-                      Text(
+                      const Text(
                         'Choisir le jour:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -297,13 +297,13 @@ class _ReservationState extends State<Reservation> {
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(Icons.access_time_outlined,
-                          color: Color(0xff008a00)),
-                      SizedBox(
+                          color: Colors.purple[700]),
+                      const SizedBox(
                         width: 5.0,
                       ),
-                      Text(
+                      const Text(
                         'Choisir l\'heure:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -415,7 +415,7 @@ class _ReservationState extends State<Reservation> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)),
                         fixedSize: const Size(90, 40),
-                        primary: const Color.fromARGB(255, 55, 206, 55),
+                        primary: Colors.purple,
                       ),
                     ),
                   ),

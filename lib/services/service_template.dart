@@ -10,7 +10,7 @@ List<Widget> serviceTemplate(services) {
             service.nom,
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
-          tileColor: Colors.greenAccent[100],
+          tileColor: Colors.purple[300],
           trailing: Text(
             '${service.prix.toString()} Dt',
             style: const TextStyle(fontWeight: FontWeight.w600),

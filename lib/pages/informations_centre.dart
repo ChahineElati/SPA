@@ -52,13 +52,13 @@ class _InformationsCentreState extends State<InformationsCentre> {
       appBar: AppBar(
         title: Text(widget.centre.nom),
         centerTitle: true,
-        backgroundColor: const Color(0xff008a00),
+        backgroundColor: Colors.purple[700]
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               child: Image(
                 image: AssetImage(spa_images[widget.image]),
                 fit: BoxFit.cover,
@@ -158,9 +158,9 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                     ),
                                     Text(
                                       'prix: ${snapshot.data[index].prix} Dt',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           fontSize: 17.0,
-                                          color: Colors.green,
+                                          color: Colors.purple[700],
                                           fontWeight: FontWeight.w600),
                                     ),
                                     const Divider(height: 20.0),
@@ -206,7 +206,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                           borderRadius:
                                               BorderRadius.circular(20.0)),
                                       fixedSize: const Size(90, 40),
-                                      primary: const Color.fromARGB(255, 55, 206, 55),),
+                                      primary: Colors.purple),
                                   child: const Text('Réserver'),
                                 ),
                               );

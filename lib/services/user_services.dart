@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 import 'package:odoo/odoo.dart';
-import 'package:spa/main.dart';
 import 'package:spa/models/user.dart';
 import 'package:spa/pages/espace_personnel.dart';
 import 'package:spa/parent.dart';
@@ -47,13 +46,11 @@ Future<Object> login(BuildContext context, TextEditingController email,
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text(
+                    child: Text(
                       'Réssayer',
                       style: TextStyle(
                         fontSize: 15,
-                        color: Color(
-                          0xff008a00,
-                        ),
+                        color: Colors.purple[700],
                       ),
                     ))
               ],
