@@ -13,7 +13,7 @@ const List<String> servicesDisponibles = [
   'Soins de pressothérapie'
 ];
 
-const List<String> spa_images = [
+const List<String> spaImages = [
   'assets/spa.jpg',
   'assets/spa1.jpg',
   'assets/spa2.jpg',

@@ -34,8 +34,6 @@ Future<List<Centre>> getCentres(Odoo odoo) async {
 }
 
 Future<List<Centre>> getTop3Centres() async {
-  List<String> centresIds;
-  List<int> ids;
   List<Centre> listeCentres = <Centre>[];
 
   Odoo odoo = Odoo(Connection(url: Url(Protocol.http, host, 8069), db: 'SPA'));

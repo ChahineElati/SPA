@@ -28,7 +28,9 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
   late final UserLoggedIn currentUser;
 
   List services = [];
+  List places = [];
   final prix = TextEditingController();
+  final place = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   String selectedService = servicesDisponibles[0];
@@ -36,11 +38,6 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
   @override
   void initState() {
     currentUser = widget.user;
-    widget.odoo!.query(from: 'res.users.log', select: [
-      'location'
-    ], where: [
-      ['id', '=', currentUser.uid]
-    ]).then((value) => print(value));
     super.initState();
   }
 
@@ -50,6 +47,11 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
       getServices(widget.centreId, widget.odoo!).then((value) {
         setState(() {
           services = value;
+        });
+      });
+      getchairsBySpaId(widget.centreId, widget.odoo!).then((value) {
+        setState(() {
+          places = value;
         });
       });
     });
@@ -111,7 +113,10 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                   SizedBox(
                     height: 15,
                   ),
-                  SizedBox(
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.symmetric(
+                            horizontal: BorderSide(color: Colors.purple))),
                     height: 200,
                     child: services.isNotEmpty
                         ? ListView.builder(
@@ -158,7 +163,9 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                                                               child: Text(
                                                                 'Confirmer',
                                                                 style: TextStyle(
-                                                                    color: Colors.purple[700],
+                                                                    color: Colors
+                                                                            .purple[
+                                                                        700],
                                                                     fontSize:
                                                                         15,
                                                                     fontWeight:
@@ -385,11 +392,235 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                           ),
                         ],
                       )),
-                  ElevatedButton(
-                      onPressed: () {
-                        ajouterChaise(currentUser.uid, odoo);
-                      },
-                      child: Text('ajouter chaise')),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.chair_alt, color: Colors.purple[700]),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Vos Places (${places.length} places)',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.symmetric(
+                            horizontal: BorderSide(color: Colors.purple))),
+                    height: 200,
+                    child: places.isNotEmpty
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: places.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(child: Text(places[index].name)),
+                                      IconButton(
+                                        onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) =>
+                                                  AlertDialog(
+                                                    title:
+                                                        Text('Modifier Place'),
+                                                    actionsAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            if (_formKey
+                                                                .currentState!
+                                                                .validate()) {
+                                                              widget.odoo!.update(
+                                                                  'salon.chair',
+                                                                  places[index]
+                                                                      .id,
+                                                                  {
+                                                                    'name': place
+                                                                        .text
+                                                                  });
+
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            }
+                                                            place.clear();
+                                                          },
+                                                          child: Text(
+                                                            'Confirmer',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                        .purple[
+                                                                    700],
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600),
+                                                          ))
+                                                    ],
+                                                    content: Form(
+                                                      key: _formKey,
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          Text(
+                                                            'Nom Place : ',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600),
+                                                          ),
+                                                          TextFormField(
+                                                              validator:
+                                                                  (value) {
+                                                                if (value ==
+                                                                    "") {
+                                                                  return 'champ vide';
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              controller: place,
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .text),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ));
+                                        },
+                                        icon: Icon(Icons.edit,
+                                            color: Colors.purple[700]),
+                                      ),
+                                      IconButton(
+                                          onPressed: () async {
+                                            await odoo.delete('salon.chair',
+                                                places[index].id);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              backgroundColor:
+                                                  Colors.redAccent[400],
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                              margin: const EdgeInsets.fromLTRB(
+                                                  15, 0, 15, 50),
+                                              content: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: const [
+                                                  Text(
+                                                    'Place Supprimée',
+                                                    style: TextStyle(
+                                                        letterSpacing: 1),
+                                                  ),
+                                                ],
+                                              ),
+                                              duration:
+                                                  const Duration(seconds: 2),
+                                            ));
+                                          },
+                                          icon: Icon(
+                                            Icons.delete,
+                                            color: Colors.red,
+                                          ))
+                                    ],
+                                  ),
+                                  Divider(),
+                                ],
+                              );
+                            })
+                        : Center(
+                            child: Text(
+                            'Aucun service ajouté',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w600),
+                          )),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                      title: Text('Modifier Place'),
+                                      actionsAlignment:
+                                          MainAxisAlignment.center,
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                ajouterChaise(currentUser.uid,
+                                                    odoo, place.text);
+
+                                                Navigator.of(context).pop();
+                                              }
+                                              place.clear();
+                                            },
+                                            child: Text(
+                                              'Confirmer',
+                                              style: TextStyle(
+                                                  color: Colors.purple[700],
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600),
+                                            ))
+                                      ],
+                                      content: Form(
+                                        key: _formKey,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'Nom Place : ',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            TextFormField(
+                                                validator: (value) {
+                                                  if (value == "") {
+                                                    return 'champ vide';
+                                                  } else {
+                                                    return null;
+                                                  }
+                                                },
+                                                controller: place,
+                                                keyboardType:
+                                                    TextInputType.text),
+                                          ],
+                                        ),
+                                      ),
+                                    ));
+                          },
+                          child: Row(
+                            children: [
+                              Icon(Icons.add, color: Colors.purple[700]),
+                              Text(
+                                'Ajouter une place',
+                                style: TextStyle(
+                                    color: Colors.purple[700],
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          )),
+                    ],
+                  ),
                 ],
               ),
             ),

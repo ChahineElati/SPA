@@ -8,14 +8,14 @@ import 'dart:math';
 
 
 Widget centreCard(context, centre, odoo, user) {
-  int random_index = Random().nextInt(spa_images.length);
+  int randomIndex = Random().nextInt(spaImages.length);
   return Card(
     child: Column(children: [
       Container(
           height: 100,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(spa_images[random_index]), fit: BoxFit.cover),
+                  image: AssetImage(spaImages[randomIndex]), fit: BoxFit.cover),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(5),
                 topRight: Radius.circular(5),
@@ -36,7 +36,7 @@ Widget centreCard(context, centre, odoo, user) {
                 context,
                 MaterialPageRoute(
                     builder: (context) => InformationsCentre(
-                        centre: centre, odoo: odoo, user: user, image: random_index)));
+                        centre: centre, odoo: odoo, user: user, image: randomIndex)));
           },
           child: Text(
             'Voir Plus',

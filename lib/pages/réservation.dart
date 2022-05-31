@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, file_names
+
 import 'package:flutter/material.dart';
 import 'package:spa/models/chair.dart';
 import 'package:spa/models/service.dart';
@@ -41,7 +43,7 @@ class _ReservationState extends State<Reservation> {
   String annee = "AAAA";
   String mois = "MM";
   String jour = "JJ";
-  late double prix_total;
+  late double prixTotal;
 
   late List<Service> services;
 
@@ -49,7 +51,7 @@ class _ReservationState extends State<Reservation> {
 
   @override
   void initState() {
-    prix_total = widget.service.prix;
+    prixTotal = widget.service.prix;
     services = [widget.service];
     super.initState();
   }
@@ -122,7 +124,7 @@ class _ReservationState extends State<Reservation> {
                                                 services, service)) {
                                               setState(() {
                                                 services.add(service);
-                                                prix_total += service.prix;
+                                                prixTotal += service.prix;
                                                 Navigator.of(context).pop();
                                               });
                                             } else {
@@ -330,7 +332,7 @@ class _ReservationState extends State<Reservation> {
                   Padding(
                     padding: const EdgeInsets.only(left: 210.0),
                     child: Text(
-                      'Total : ${prix_total.toStringAsFixed(2)} Dt',
+                      'Total : ${prixTotal.toStringAsFixed(2)} Dt',
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -359,7 +361,7 @@ class _ReservationState extends State<Reservation> {
                                 dropDownValue,
                                 servicesIds,
                                 '$annee-$mois-$jour $time:00',
-                                prix_total);
+                                prixTotal);
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               backgroundColor: Colors.greenAccent[400],
                               behavior: SnackBarBehavior.floating,

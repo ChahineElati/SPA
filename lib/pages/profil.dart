@@ -39,12 +39,21 @@ class _ProfilState extends State<Profil> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Text(
-                "Profil",
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600),
-              ),
-            ),
+            FutureBuilder<User>(
+                future: user,
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return Center(
+                      child: Text(
+                        snapshot.data.nom,
+                        style: TextStyle(
+                            fontSize: 30.0, fontWeight: FontWeight.w600),
+                      ),
+                    );
+                  } else {
+                    return Text('');
+                  }
+                }),
             Center(
               child: Icon(Icons.account_circle_rounded,
                   size: 110, color: Colors.purple[700]),
@@ -68,24 +77,18 @@ class _ProfilState extends State<Profil> {
                           Row(
                             children: [
                               Expanded(
-                                  child: Text(
-                                      'Connecté en tant que: ${snapshot.data.nom}')),
-                              Expanded(
-                                  child: TextButton(
-                                      onPressed: () {
-                                        odoo.disconnect();
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => SPA(
-                                                    user: null, odoo: odoo)));
-                                      },
-                                      child: Text(
-                                        'Se déconnecter',
-                                        style: TextStyle(
-                                            color: Colors.purple[700],
-                                            fontWeight: FontWeight.w600),
-                                      )))
+                                child: ElevatedButton.icon(
+                                  label: Text('Déconnexion'),
+                                    onPressed: () {
+                                      odoo.disconnect();
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SPA(user: null, odoo: odoo)));
+                                    },
+                                    icon: Icon(Icons.logout,)),
+                              )
                             ],
                           ),
                           SizedBox(
@@ -266,8 +269,7 @@ class _ProfilState extends State<Profil> {
                                         borderRadius:
                                             BorderRadius.circular(20.0)),
                                     fixedSize: const Size(100, 40),
-                                    primary:
-                                        Colors.purple,
+                                    primary: Colors.purple,
                                   ),
                                 ),
                               ),

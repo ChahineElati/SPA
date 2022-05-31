@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
-import 'package:spa/main.dart';
 import 'package:spa/services/centre_card.dart';
 import 'package:spa/services/centre_services.dart';
 

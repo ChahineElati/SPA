@@ -3,7 +3,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:odoo/odoo.dart';
 import 'package:spa/main.dart';
 import 'package:spa/pages/accueil.dart';
@@ -12,7 +11,6 @@ import 'package:spa/pages/login.dart';
 import 'package:spa/pages/profil.dart';
 import 'package:spa/pages/liste_reservations.dart';
 import 'package:spa/services/user_services.dart';
-import 'package:spa/strings.dart';
 
 class SPA extends StatefulWidget {
   final UserLoggedIn? user;
@@ -63,13 +61,13 @@ class _SPAState extends State<SPA> {
             widget.user == null
                 ? ListeCentres(odoo: odoo, user: widget.user)
                 : ListeCentres(odoo: widget.odoo, user: widget.user),
-            widget.user == null  || widget.user!.uid == 2
+            widget.user == null || widget.user!.uid == 2
                 ? Login()
                 : Reservations(
                     user: widget.user,
                     odoo: widget.odoo,
                   ),
-            widget.user == null  || widget.user!.uid == 2
+            widget.user == null || widget.user!.uid == 2
                 ? Login()
                 : Profil(user: widget.user, odoo: widget.odoo),
           ],

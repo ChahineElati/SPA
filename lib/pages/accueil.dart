@@ -74,11 +74,11 @@ class _AccueilState extends State<Accueil> {
                 //   horizontal: BorderSide(color: Colors.green, width: 2),
                 // ),
                 image: DecorationImage(
-                  image: AssetImage(
-                    'assets/text box violet.jpg',
-                  ),
-                  fit: BoxFit.cover,
-                )),
+              image: AssetImage(
+                'assets/text box violet.jpg',
+              ),
+              fit: BoxFit.cover,
+            )),
             child: Padding(
               padding: EdgeInsets.fromLTRB(10, 30, 0, 0),
               child: Text('LES MEUILLEURS CENTRES SPA',
@@ -100,7 +100,7 @@ class _AccueilState extends State<Accueil> {
                     shrinkWrap: true,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
-                      int randomIndex = Random().nextInt(spa_images.length);
+                      int randomIndex = Random().nextInt(spaImages.length);
                       return Card(
                           margin: EdgeInsets.all(10),
                           child: Column(
@@ -202,13 +202,12 @@ class _AccueilState extends State<Accueil> {
                                             style: TextStyle(fontSize: 15.0),
                                           ),
                                           style: ElevatedButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        20.0)),
-                                            fixedSize: const Size(85, 40),
-                                            primary: Colors.purple
-                                          ),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0)),
+                                              fixedSize: const Size(85, 40),
+                                              primary: Colors.purple),
                                         ),
                                       ],
                                     ),

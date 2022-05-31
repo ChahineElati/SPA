@@ -50,17 +50,16 @@ class _InformationsCentreState extends State<InformationsCentre> {
       backgroundColor: Colors.grey.shade200,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: Text(widget.centre.nom),
-        centerTitle: true,
-        backgroundColor: Colors.purple[700]
-      ),
+          title: Text(widget.centre.nom),
+          centerTitle: true,
+          backgroundColor: Colors.purple[700]),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               child: Image(
-                image: AssetImage(spa_images[widget.image]),
+                image: AssetImage(spaImages[widget.image]),
                 fit: BoxFit.cover,
               ),
               height: 150,
@@ -71,81 +70,106 @@ class _InformationsCentreState extends State<InformationsCentre> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.centre.nom,
-                    style:
-                        const TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40),
+                        color: Colors.purple),
+                    width: 500,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, bottom: 10),
+                      child: Text(
+                        widget.centre.nom,
+                        style: const TextStyle(
+                            fontFamily: 'Merienda One',
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
                   ),
-                  FutureBuilder<String>(
-                      future: averageRating(widget.odoo, widget.centre.id),
-                      builder: (context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          return Row(
+                  const SizedBox(height: 10,),
+                  Container(
+                    decoration: BoxDecoration(border: Border.all(color: Colors.purple, width: 2), borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.centre.addresse,
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                          FutureBuilder<String>(
+                              future: averageRating(widget.odoo, widget.centre.id),
+                              builder: (context, AsyncSnapshot snapshot) {
+                                if (snapshot.hasData) {
+                                  return Row(
+                                    children: [
+                                      Text(
+                                        'Avis moyenne ${snapshot.data} ',
+                                        style: const TextStyle(fontSize: 20),
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellow.shade700,
+                                        size: 23,
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return const Text('');
+                                }
+                              }),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                'Avis moyenne ${snapshot.data} ',
-                                style: const TextStyle(fontSize: 20),
+                              const Text(
+                                'Evaluer ',
+                                style: TextStyle(fontSize: 15),
                               ),
-                              Icon(
-                                Icons.star,
-                                color: Colors.yellow.shade700,
-                                size: 23,
+                              RatingBar.builder(
+                                ignoreGestures: rated,
+                                itemSize: 15,
+                                initialRating: 0,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: false,
+                                itemCount: 5,
+                                itemPadding:
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                itemBuilder: (context, _) => const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (rating) async {
+                                  if (widget.user != null && widget.user.uid != 2) {
+                                    if (!rated) {
+                                      setState(() {
+                                        rated = true;
+                                      });
+                                      updateRating(widget.odoo, widget.centre.id,
+                                          rating, widget.user.uid);
+                                    }
+                                  }
+                                },
                               ),
                             ],
-                          );
-                        } else {
-                          return const Text('');
-                        }
-                      }),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Evaluer ',
-                        style: TextStyle(fontSize: 15),
+                          ),
+                          widget.user != null && widget.user.uid != 2
+                              ? rated == false
+                                  ? const Text('')
+                                  : const Text('vous avez évalué ce centre')
+                              : const Text('Veillez connecter pour évaluer'),
+                        ],
                       ),
-                      RatingBar.builder(
-                        ignoreGestures: rated,
-                        itemSize: 15,
-                        initialRating: 0,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: false,
-                        itemCount: 5,
-                        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (rating) async {
-                          if (widget.user != null && widget.user.uid != 2) {
-                            if (!rated) {
-                              setState(() {
-                                rated = true;
-                              });
-                              updateRating(widget.odoo, widget.centre.id, rating,
-                                  widget.user.uid);
-                            }
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                  widget.user != null && widget.user.uid != 2
-                      ? rated == false
-                          ? const Text('')
-                          : const Text('vous avez évalué ce centre')
-                      : const Text('Veillez connecter pour évaluer'),
-                  Text(
-                    widget.centre.addresse,
-                    style: const TextStyle(color: Colors.grey),
+                    ),
                   ),
                   FutureBuilder<List>(
                     future: getServices(widget.centre.id, widget.odoo),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.data != null) {
                         return ListView.builder(
-                          shrinkWrap: true,
+                            shrinkWrap: true,
                             itemCount: snapshot.data.length,
                             itemBuilder: (context, index) {
                               return ListTile(
@@ -175,7 +199,8 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                               builder: (context) => Reservation(
                                                     odoo: widget.odoo,
                                                     centre: widget.centre,
-                                                    service: snapshot.data[index],
+                                                    service:
+                                                        snapshot.data[index],
                                                     user: widget.user,
                                                   )));
                                     } else {
@@ -190,7 +215,8 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                                 actions: [
                                                   TextButton(
                                                       onPressed: () {
-                                                        Navigator.of(context).pop();
+                                                        Navigator.of(context)
+                                                            .pop();
                                                       },
                                                       child: const Text(
                                                         'Fermer',
