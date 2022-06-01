@@ -12,7 +12,7 @@ List<Widget> serviceTemplate(services) {
           ),
           tileColor: Colors.purple[300],
           trailing: Text(
-            '${service.prix.toString()} Dt',
+            '${service.prix.toStringAsFixed(2)} Dt',
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
           shape:

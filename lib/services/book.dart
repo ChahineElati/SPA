@@ -2,7 +2,8 @@
 
 import 'package:odoo/odoo.dart';
 
-void book(odoo, user, chairId, servicesIds, date, double prixTotal, int centreId) async {
+void book(odoo, user, chairId, servicesIds, date, double prixTotal,
+    int centreId) async {
   await odoo.insert('salon.booking', {
     'name': user.name,
     'email': user.username,
@@ -11,7 +12,6 @@ void book(odoo, user, chairId, servicesIds, date, double prixTotal, int centreId
     'time': date,
     'spa_id': centreId
   });
-  
 }
 
 Future<bool> verifierTempsReservation(
@@ -40,7 +40,37 @@ Future<bool> verifierTempsReservation(
 }
 
 void approve(Odoo odoo) async {
-  int id = await odoo.query(from: 'salon.booking', select: ['id'], orderBy: 'id DESC').then((value) => value[0]['id']);
-  odoo.update('salon.booking', id, {'state':'approved'});
+  int id = await odoo
+      .query(from: 'salon.booking', select: ['id'], orderBy: 'id DESC')
+      .then((value) => value[0]['id']);
+  odoo.update('salon.booking', id, {'state': 'approved'});
   print(id);
+}
+
+Future<List> showReservationsByUser(Odoo odoo, UserLoggedIn user) async {
+  List list = [];
+
+  List reservations = await odoo.query(from: 'salon.booking', select: [
+    'name',
+    'services',
+    'time'
+  ], where: [
+    ['email', '=', user.username]
+  ]);
+
+  for (var reservation in reservations) {
+    Map map = {};
+    List li = [];
+    List services = await odoo.query(from: 'salon.service', select: []);
+    for (var service in services) {
+      if (reservation['services'].contains(service['id'])) {
+        li.add(service['name']);
+      }
+    }
+
+    map = {'reservation': reservation, 'services': li};
+    list.add(map);
+  }
+
+  return list;
 }

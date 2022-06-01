@@ -46,31 +46,33 @@ class _SPAState extends State<SPA> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey.shade200,
-      body: Padding(
-        padding: EdgeInsets.only(left: 0.0),
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() => _selectedIndex = index);
-          },
-          children: <Widget>[
-            Accueil(
-              user: widget.user,
-              odoo: widget.odoo,
-            ),
-            widget.user == null
-                ? ListeCentres(odoo: odoo, user: widget.user)
-                : ListeCentres(odoo: widget.odoo, user: widget.user),
-            widget.user == null || widget.user!.uid == 2
-                ? Login()
-                : Reservations(
-                    user: widget.user,
-                    odoo: widget.odoo,
-                  ),
-            widget.user == null || widget.user!.uid == 2
-                ? Login()
-                : Profil(user: widget.user, odoo: widget.odoo),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(left: 0.0),
+          child: PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() => _selectedIndex = index);
+            },
+            children: <Widget>[
+              Accueil(
+                user: widget.user,
+                odoo: widget.odoo,
+              ),
+              widget.user == null
+                  ? ListeCentres(odoo: odoo, user: widget.user)
+                  : ListeCentres(odoo: widget.odoo, user: widget.user),
+              widget.user == null || widget.user!.uid == 2
+                  ? Login()
+                  : Reservations(
+                      user: widget.user,
+                      odoo: widget.odoo,
+                    ),
+              widget.user == null || widget.user!.uid == 2
+                  ? Login()
+                  : Profil(user: widget.user, odoo: widget.odoo),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

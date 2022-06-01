@@ -76,31 +76,48 @@ class _InformationsCentreState extends State<InformationsCentre> {
                         color: Colors.purple),
                     width: 500,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15, bottom: 10),
-                      child: Text(
-                        widget.centre.nom,
-                        style: const TextStyle(
-                            fontFamily: 'Merienda One',
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Center(
+                        child: Text(
+                          widget.centre.nom,
+                          style: const TextStyle(
+                              fontFamily: 'Merienda One',
+                              fontSize: 30.0,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Container(
-                    decoration: BoxDecoration(border: Border.all(color: Colors.purple, width: 2), borderRadius: BorderRadius.circular(20)),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                        border: Border.all(color: Colors.purple, width: 2),
+                        borderRadius: BorderRadius.circular(20)),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.centre.addresse,
-                            style: const TextStyle(color: Colors.grey),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: Colors.purple[700],
+                                size: 20,
+                              ),
+                              const SizedBox(width: 5,),
+                              Text(
+                                widget.centre.addresse,
+                                style: const TextStyle(color: Colors.grey),
+                              ),
+                            ],
                           ),
                           FutureBuilder<String>(
-                              future: averageRating(widget.odoo, widget.centre.id),
+                              future:
+                                  averageRating(widget.odoo, widget.centre.id),
                               builder: (context, AsyncSnapshot snapshot) {
                                 if (snapshot.hasData) {
                                   return Row(
@@ -142,13 +159,17 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                   color: Colors.amber,
                                 ),
                                 onRatingUpdate: (rating) async {
-                                  if (widget.user != null && widget.user.uid != 2) {
+                                  if (widget.user != null &&
+                                      widget.user.uid != 2) {
                                     if (!rated) {
                                       setState(() {
                                         rated = true;
                                       });
-                                      updateRating(widget.odoo, widget.centre.id,
-                                          rating, widget.user.uid);
+                                      updateRating(
+                                          widget.odoo,
+                                          widget.centre.id,
+                                          rating,
+                                          widget.user.uid);
                                     }
                                   }
                                 },
@@ -181,7 +202,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                       style: const TextStyle(fontSize: 20.0),
                                     ),
                                     Text(
-                                      'prix: ${snapshot.data[index].prix} Dt',
+                                      'prix: ${snapshot.data[index].prix.toStringAsFixed(2)} Dt',
                                       style: TextStyle(
                                           fontSize: 17.0,
                                           color: Colors.purple[700],
@@ -192,7 +213,7 @@ class _InformationsCentreState extends State<InformationsCentre> {
                                 ),
                                 trailing: ElevatedButton(
                                   onPressed: () {
-                                    if (widget.user != null) {
+                                    if (widget.user != null && widget.user.uid != 2) {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(

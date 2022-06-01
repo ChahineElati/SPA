@@ -53,10 +53,6 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +140,13 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                                   Row(
                                     children: [
                                       Expanded(
-                                          child: Text(services[index].nom)),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(services[index].nom),
+                                              Text('prix : ${services[index].prix.toStringAsFixed(2)} Dt'),
+                                            ],
+                                          )),
                                       IconButton(
                                         onPressed: () {
                                           showDialog(
@@ -560,7 +562,7 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                             })
                         : Center(
                             child: Text(
-                            'Aucune place ajouté',
+                            'Aucune place ajoutée',
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w600),
                           )),
@@ -639,28 +641,28 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                   SizedBox(
                     height: 15,
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.supervisor_account_rounded,
-                          color: Colors.purple[700]),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Vos clients',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                  ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: clients.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(clients[index]['name']),
-                        );
-                      })
+                  // Row(
+                  //   children: [
+                  //     Icon(Icons.supervisor_account_rounded,
+                  //         color: Colors.purple[700]),
+                  //     SizedBox(
+                  //       width: 5,
+                  //     ),
+                  //     Text(
+                  //       'Vos clients',
+                  //       style: TextStyle(
+                  //           fontSize: 20, fontWeight: FontWeight.w600),
+                  //     ),
+                  //   ],
+                  // ),
+                  // ListView.builder(
+                  //     shrinkWrap: true,
+                  //     itemCount: clients.length,
+                  //     itemBuilder: (context, index) {
+                  //       return ListTile(
+                  //         title: Text(clients[index]['name']),
+                  //       );
+                  //     })
                 ],
               ),
             ),

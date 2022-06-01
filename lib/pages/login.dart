@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)),
-                        fixedSize: const Size(130, 40),
+                        fixedSize: const Size(140, 40),
                         primary: Colors.purple,
                       ),
                     ),

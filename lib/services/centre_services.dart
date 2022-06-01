@@ -60,3 +60,19 @@ Future<Centre> getCentreById(Odoo odoo, int centreId) async {
 
   return c;
 }
+
+Future<List<Centre>> getCentresFiltred(Odoo odoo, String search) async {
+  List<Centre> listeCentres = <Centre>[];
+  List searchedCentres = await odoo.query(from: 'salon.centre', select: [], where: [
+    ['address', 'ilike', '${search}']
+  ]);
+  for (var centre in searchedCentres) {
+    Centre c = Centre(centre['name'], centre['address'], centre['description'],
+        centre['id'], centre['avg_rating']);
+    listeCentres.add(c);
+  }
+  print(searchedCentres);
+  print(search);
+
+  return listeCentres;
+}

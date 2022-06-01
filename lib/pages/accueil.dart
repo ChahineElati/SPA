@@ -35,14 +35,13 @@ class _AccueilState extends State<Accueil> {
               ),
               Container(
                 alignment: Alignment.topCenter,
-                padding: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.only(top: 30),
                 child: SizedBox(
                   child: Center(
                     child: Column(
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: Color(0x0fffffff).withOpacity(0.4),
                             borderRadius: BorderRadius.circular(150),
                           ),
                           width: 220,
@@ -67,7 +66,7 @@ class _AccueilState extends State<Accueil> {
           ),
           SizedBox(height: 20),
           Container(
-            height: 90,
+            height: 60,
             width: 1000,
             decoration: BoxDecoration(
                 // border: Border.symmetric(
@@ -80,11 +79,10 @@ class _AccueilState extends State<Accueil> {
               fit: BoxFit.cover,
             )),
             child: Padding(
-              padding: EdgeInsets.fromLTRB(10, 30, 0, 0),
+              padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
               child: Text('LES MEUILLEURS CENTRES SPA',
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.w600,
                     fontFamily: 'Merienda One',
                     letterSpacing: 1.5,
                     color: Colors.white,
@@ -115,6 +113,7 @@ class _AccueilState extends State<Accueil> {
                                       Icon(
                                         Icons.spa,
                                         color: Colors.white,
+                                        size: 20,
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -122,14 +121,14 @@ class _AccueilState extends State<Accueil> {
                                       Text(
                                         snapshot.data[index].nom,
                                         style: TextStyle(
-                                            fontSize: 25,
+                                            fontSize: 20,
                                             color: Colors.white,
-                                            fontWeight: FontWeight.bold),
+                                            ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                height: 75,
+                                height: 43,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(10),
@@ -206,7 +205,7 @@ class _AccueilState extends State<Accueil> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           20.0)),
-                                              fixedSize: const Size(85, 40),
+                                              fixedSize: const Size(90, 40),
                                               primary: Colors.purple),
                                         ),
                                       ],

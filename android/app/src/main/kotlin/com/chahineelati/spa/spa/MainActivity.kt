@@ -1,4 +1,4 @@
-package com.chahine_elati.spa.spa
+package com.chahineelati.spa.spa
 
 import io.flutter.embedding.android.FlutterActivity
 

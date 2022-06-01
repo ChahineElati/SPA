@@ -166,7 +166,7 @@ class _ReservationState extends State<Reservation> {
                                             }
                                           },
                                         ),
-                                        trailing: Text('${service.prix} Dt'),
+                                        trailing: Text('${service.prix.toStringAsFixed(2)} Dt'),
                                       ),
                                     ],
                                   ),
