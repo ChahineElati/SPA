@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
                                   const CreerComptePersonnel()));
                     },
                     child: Text(
-                      'Devenir un personnel SPA',
+                      'Créer votre compte SPA',
                       softWrap: true,
                       style: TextStyle(
                           fontSize: 15,

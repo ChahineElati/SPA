@@ -11,9 +11,10 @@ Future setWindowSize() async {
 }
 
 var session = SessionManager();
-void main() async {
+void main(){
   Odoo odoo = Odoo(Connection(url: Url(Protocol.http, host, 8069), db: 'SPA'));
-  var user = await odoo.connect(Credential("chahinosaiyan@gmail.com", "1272000Ch*"));
+  var user;
+  odoo.connect(Credential("chahinosaiyan@gmail.com", "1272000Ch*")).then((value) => user = value);
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: appName,

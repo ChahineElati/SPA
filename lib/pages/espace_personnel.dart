@@ -575,7 +575,7 @@ class _EspacePersonnelSPAState extends State<EspacePersonnelSPA> {
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
-                                      title: Text('Modifier Place'),
+                                      title: Text('Ajouter Place'),
                                       actionsAlignment:
                                           MainAxisAlignment.center,
                                       actions: [

@@ -2,7 +2,7 @@
 const String appName = 'SPA';
 
 const pagesNames = <String>['Accueil', 'Centres', 'Mes Réservations', 'Profil'];
-String host = "192.168.1.21";
+const String host = "localhost";
 const List<String> servicesDisponibles = [
   'Soins du visage',
   'Soins massages du corps',

@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
@@ -10,6 +12,7 @@ import 'package:spa/parent.dart';
 import 'package:spa/services/centre_services.dart';
 import 'package:spa/services/rating_service.dart';
 import 'package:spa/strings.dart';
+import 'package:http/http.dart' as http;
 
 Odoo odoo = Odoo(Connection(url: Url(Protocol.http, host, 8069), db: 'SPA'));
 
@@ -24,8 +27,10 @@ Future<Object> login(BuildContext context, TextEditingController email,
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  EspacePersonnelSPA(user: userLogin, odoo: odoo, centreId: userType['personnel_centre'][0])));
+              builder: (context) => EspacePersonnelSPA(
+                  user: userLogin,
+                  odoo: odoo,
+                  centreId: userType['personnel_centre'][0])));
     } else {
       Navigator.push(
           context,
@@ -112,26 +117,29 @@ Future<User> getUser(id) async {
   return User(user!['name'], user['login'], user['password']);
 }
 
-Future<int> sendCode(code, rcpEmail) async {
-  const email = 'chahinosaiyan@gmail.com';
-  const pwd = '1272000ch';
-  final smtpServer = gmail(email, pwd);
-  final message = Message()
-    ..from = const Address(email, 'chahine')
-    ..recipients = [rcpEmail]
-    ..subject = 'Confirmation Code'
-    ..html = '''
-              <h1>Confirmation code</h1>
-              <p>Enter this confirmation code in field:</p>
-              <span><font style="font-family: "Times New Roman", Times, serif;">$code<font></span>
-''';
-  try {
-    await send(message, smtpServer);
-    print('email sent');
-  } on Exception catch (e) {
-    print(e);
-  }
-  return 0;
+Future sendCode({required code, required rcpEmail}) async {
+  const serviceId = "service_s3bw9pd";
+  const templateId = "template_15yj8th";
+  const userId = "Euuf-W_EcpJEwLsUo";
+
+  final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
+  final response = await http.post(
+    url,
+    headers: {
+      'origin': 'http://localhost',
+      'Content-Type': 'application/json'
+    },
+    body: json.encode({
+      'service_id': serviceId,
+      'template_id': templateId,
+      'user_id': userId,
+      'template_params': {
+        'user_email': rcpEmail,
+        'code': code,
+      }
+    })
+  );
+  print(response.body);
 }
 
 void updateUser(id, nom, mdp) async {

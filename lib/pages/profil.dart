@@ -78,7 +78,7 @@ class _ProfilState extends State<Profil> {
                             children: [
                               Expanded(
                                 child: ElevatedButton.icon(
-                                  label: Text('Déconnexion'),
+                                    label: Text('Déconnexion'),
                                     onPressed: () {
                                       odoo.disconnect();
                                       Navigator.push(
@@ -87,7 +87,9 @@ class _ProfilState extends State<Profil> {
                                               builder: (context) =>
                                                   SPA(user: null, odoo: odoo)));
                                     },
-                                    icon: Icon(Icons.logout,)),
+                                    icon: Icon(
+                                      Icons.logout,
+                                    )),
                               )
                             ],
                           ),
@@ -145,7 +147,9 @@ class _ProfilState extends State<Profil> {
                               TextButton.icon(
                                   onPressed: () {
                                     String code = generateRandomString(6);
-                                    sendCode(code, widget.user!.username);
+                                    sendCode(
+                                        code: code,
+                                        rcpEmail: widget.user!.username);
                                     showDialog(
                                         context: context,
                                         builder:

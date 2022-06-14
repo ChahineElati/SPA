@@ -54,7 +54,7 @@ class _AccueilState extends State<Accueil> {
                           'SPA BOOKING',
                           style: TextStyle(
                               fontSize: 30,
-                              color: Colors.white,
+                              color: Colors.pinkAccent,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -78,8 +78,7 @@ class _AccueilState extends State<Accueil> {
               ),
               fit: BoxFit.cover,
             )),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
+            child: Center(
               child: Text('LES MEUILLEURS CENTRES SPA',
                   style: TextStyle(
                     fontSize: 18,

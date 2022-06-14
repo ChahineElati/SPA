@@ -82,7 +82,7 @@ class _ReservationsState extends State<Reservations> {
                                         child: Text(
                                           reservations[index]['services'][i],
                                           style: TextStyle(
-                                              fontSize: 10,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.w600,
                                               color: Colors.white),
                                         ),

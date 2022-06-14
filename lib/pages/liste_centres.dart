@@ -68,13 +68,17 @@ class _ListeCentresState extends State<ListeCentres> {
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.data != null) {
                       if (snapshot.data.length != 0) {
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) {
-                              return centreCard(context, snapshot.data[index],
-                                  widget.odoo, widget.user);
-                            });
+                        return Container(
+                          width: 700,
+                          child: ListView.builder(
+                              primary: false,
+                              shrinkWrap: true,
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                return centreCard(context, snapshot.data[index],
+                                    widget.odoo, widget.user);
+                              }),
+                        );
                       } else {
                         return const Center(
                             child: Text(
